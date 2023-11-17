@@ -9,20 +9,17 @@ using System;
 using System.Data;
 using System.Diagnostics;
 using TMS.Web.Models;
-using TMS.Web.Services;
 
 namespace TMS.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ITokenService _tokenService;
         static HttpClient httpClient = new HttpClient();
 
-        public HomeController(ILogger<HomeController> logger, ITokenService tokenService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _tokenService = tokenService;
         }
 
         public async Task<string> IndexAsync(int id)
@@ -44,11 +41,11 @@ namespace TMS.Web.Controllers
         public async Task<string> Index2Async(int id)
         {
             var text = "empty";
-                       
-            var token = await _tokenService.GetToken("apiGateWay");
+            var accessToken = await AuthenticationHttpContextExtensions.GetTokenAsync(
+HttpContext, OpenIdConnectParameterNames.AccessToken);
             using (var client = new HttpClient())
             {
-                client.SetBearerToken(token.AccessToken);
+                client.SetBearerToken(accessToken);
                 text = await client.GetStringAsync("https://localhost:7280/Operations/index");
 
                 if (id == 1)

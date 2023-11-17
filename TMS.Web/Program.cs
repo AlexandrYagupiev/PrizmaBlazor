@@ -1,16 +1,12 @@
 using IdentityModel.Client;
-using Keycloak.AuthServices.Authentication;
-using Keycloak.AuthServices.Common;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using System.Net;
 using TMS.Web.Models;
-using TMS.Web.Services;
 using static IdentityModel.OidcConstants;
 using static System.Formats.Asn1.AsnWriter;
 
@@ -19,7 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddTransient<ITokenService, TokenService>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -32,6 +27,11 @@ builder.Services.AddAuthentication(options =>
     options.ExpireTimeSpan = new TimeSpan(0, 5, 0);
     options.Events = new CookieAuthenticationEvents
     {
+        OnRedirectToLogin = async context =>
+        {
+            var expiresAt = context.Properties.GetTokenValue("expires_at");
+            Debug.WriteLine($"TOKENINFO OnRedirectToLogin expiresAt:{expiresAt}");
+        },
         OnValidatePrincipal = async context =>
         {
             var now = DateTimeOffset.UtcNow;
@@ -91,56 +91,6 @@ builder.Services.AddAuthentication(options =>
         RoleClaimType = "roles"
     };
 });
-
-//var keyCloakConfig = new KeycloakAuthenticationOptions
-//{
-//    Realm = "Test",
-//    AuthServerUrl = "http://tmp.doker.ru:8080/",
-//    SslRequired = "none",
-//    Resource = "test-client"
-//};
-
-//    builder.Services.AddAuthentication(config =>
-//        {
-//            config.DefaultScheme = "Cookie";
-//            config.DefaultChallengeScheme = "oidc";
-//        });
-
-//    builder.Services.AddKeycloakAuthentication(keyCloakConfig, options =>
-//    {
-//        options.SaveToken = true;
-//        options.Authority = "http://tmp.doker.ru:8080/realms/Test";
-//        options.RequireHttpsMetadata = false;
-//    });
-
-//builder.Services.AddAuthentication(config =>
-//        {
-//            config.DefaultScheme = "Cookie";
-//            config.DefaultChallengeScheme = "oidc";
-//        })
-//        .AddCookie("Cookie")
-//        .AddOpenIdConnect("oidc", config =>
-//        {
-//            config.Authority = "https://sts.skoruba.local/";
-//            config.ClientId = "web";
-//            config.ClientSecret = "secret";
-
-//            config.ResponseType = "id_token token";
-//            config.SignedOutCallbackPath = "/Home/Index";
-//            config.SaveTokens = true;
-
-//            config.ClaimActions.DeleteClaim("amr");
-//            config.ClaimActions.DeleteClaim("s_hash");
-
-//            config.GetClaimsFromUserInfoEndpoint = true;
-
-//            // configure scope
-//            config.Scope.Add("openid");
-//            config.Scope.Add("profile");
-//            config.Scope.Add("roles");
-//            config.Scope.Add("apiGateWay");
-//          });
-
 
 var app = builder.Build();
 

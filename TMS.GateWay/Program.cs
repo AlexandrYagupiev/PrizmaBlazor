@@ -39,6 +39,7 @@ public class Program
                 options.Audience = "account";
                 options.RequireHttpsMetadata = false;
 
+#if DEBUG
                 // Обработчик успешной валидации токена
                 options.Events = new JwtBearerEvents
                 {
@@ -70,84 +71,7 @@ public class Program
                 };
                
             });
-
-
-            //var keyCloakConfig = new KeycloakAuthenticationOptions
-            //{
-            //    Realm = "Test",
-            //    AuthServerUrl = "http://tmp.doker.ru:8080/",
-            //    SslRequired = "none",
-            //};
-
-            //s.AddKeycloakAuthentication(keyCloakConfig);
-
-            //var authenticationProviderKey = "Bearer";
-            //Action<JwtBearerOptions> options = (opt) =>
-            //{
-            //    opt.Authority = "https://sts.skoruba.local";
-            //    opt.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateAudience = false
-            //    };
-            //};
-            //s.AddAuthentication()
-            //    .AddJwtBearer(authenticationProviderKey, options);
-
-
-            //var authenticationProviderKey = "Bearer";
-            //Action<JwtBearerOptions> options = (opt) =>
-            //{
-            //    opt.Authority = "https://sts.skoruba.local";
-            //    opt.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateAudience = false
-            //    };
-            //};
-            //s.AddAuthentication()
-            //    .AddJwtBearer(authenticationProviderKey, options);
-
-
-
-            // s.AddAuthentication("Bearer")
-            //.AddJwtBearer("Bearer", options =>
-            //{
-            //    options.Authority = "https://sts.skoruba.local";
-
-            //    options.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateAudience = false
-            //    };
-            //});
-
-            //var authenticationProviderKey = "TestKey";
-            //Action<JwtBearerOptions> options = (opt) =>
-            //{
-            //    opt.Authority = "https://whereyouridentityserverlives.com";
-            //    // ...
-            //};
-            //s.AddAuthentication()
-            //    .AddJwtBearer(authenticationProviderKey, options);
-
-            //s.AddAuthentication(options =>
-            //{
-            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-            //})
-            // .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-            // .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
-            // {
-            //     options.Authority = "https://sts.skoruba.local/";
-
-            //     options.ClientId = "shopping_web";
-            //     options.ClientSecret = "secret";
-            //     options.ResponseType = "code";
-
-            //     options.Scope.Add("openid");
-            //     options.Scope.Add("profile");
-            //     options.SaveTokens = true;
-            //     options.GetClaimsFromUserInfoEndpoint = true;
-            // });
-
+#endif          
             s.AddOcelot();
         })
         .ConfigureLogging((hostingContext, logging) =>
