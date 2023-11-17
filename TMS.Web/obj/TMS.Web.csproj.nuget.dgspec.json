@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Web\\TMS.Web.csproj": {}
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Web\\TMS.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Web\\TMS.Web.csproj": {
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Web\\TMS.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Web\\TMS.Web.csproj",
+        "projectUniqueName": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Web\\TMS.Web.csproj",
         "projectName": "TMS.Web",
-        "projectPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Web\\TMS.Web.csproj",
+        "projectPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Web\\TMS.Web.csproj",
         "packagesPath": "C:\\Users\\lyagaev\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Web\\obj\\",
+        "outputPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj": {}
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj": {
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj",
+        "projectUniqueName": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj",
         "projectName": "TMS.Scheme",
-        "projectPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj",
+        "projectPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj",
         "packagesPath": "C:\\Users\\lyagaev\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Scheme\\obj\\",
+        "outputPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Scheme\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

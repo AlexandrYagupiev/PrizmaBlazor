@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8ZDQ1BaQPpc+wj5u//qypjOdAOBsD7EunnwPM+uBuVmlsz4juPWCRqNjcjLpicqG+ZN5qnP5uVq/8xeqXa2uRg==",
+  "dgSpecHash": "vp7eLC3+QlT82oTs4wUH+b81B1d0jXlsNQdjRhz38Q4sbdJZ1fruk/5LjgvKuRmquwU1bqb4t655fOypEFsLPw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj",
+  "projectFilePath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Scheme\\TMS.Scheme.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lyagaev\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
     "C:\\Users\\lyagaev\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

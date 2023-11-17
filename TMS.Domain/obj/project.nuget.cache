@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "abCYzFO2SlbSPmdkOphkI0pV5q3AWJDN5MRnXyuiHu8qxmDoxq4uA3shJ8RUojMbjM+rLKcha7FbkGxibMrc9A==",
+  "dgSpecHash": "2TX8yezdAMbV41l38+/2eH2STC6pLsAfRAXVtva5c26K30ixKydljg4Onzcs4/PWSzBjcLm8bbcT4HLIVGdUbw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Domain\\TMS.Domain.csproj",
+  "projectFilePath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Domain\\TMS.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

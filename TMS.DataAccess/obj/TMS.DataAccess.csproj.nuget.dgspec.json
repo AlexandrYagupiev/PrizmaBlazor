@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.DataAccess\\TMS.DataAccess.csproj": {}
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.DataAccess\\TMS.DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.DataAccess\\TMS.DataAccess.csproj": {
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.DataAccess\\TMS.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.DataAccess\\TMS.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.DataAccess\\TMS.DataAccess.csproj",
         "projectName": "TMS.DataAccess",
-        "projectPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.DataAccess\\TMS.DataAccess.csproj",
+        "projectPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.DataAccess\\TMS.DataAccess.csproj",
         "packagesPath": "C:\\Users\\lyagaev\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dWbQxKFFll0EyiL2BpjPwvOKxUJ3kwNNdSbAKu899HbPwetnujCkNnR3/yttdNPYQbH1NZXiok9v5pZnIG4cTA==",
+  "dgSpecHash": "tK83nuNccWvpaocDkiva9thodSuw6zbfDeRWyXGVrhCaSBTTTaIwN5xB7i/f5jrK9zIP0tQucY5qbhAVLB8Ptw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Operations\\TMS.Operations.csproj",
+  "projectFilePath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Operations\\TMS.Operations.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lyagaev\\.nuget\\packages\\identitymodel\\4.4.0\\identitymodel.4.4.0.nupkg.sha512",
     "C:\\Users\\lyagaev\\.nuget\\packages\\identityserver4.storage\\4.1.2\\identityserver4.storage.4.1.2.nupkg.sha512",

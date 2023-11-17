@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj": {}
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj": {
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj",
+        "projectUniqueName": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj",
         "projectName": "TMS.GateWay",
-        "projectPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj",
+        "projectPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj",
         "packagesPath": "C:\\Users\\lyagaev\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.GateWay\\obj\\",
+        "outputPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.GateWay\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NDJ3D+u/QqWtu6/vT65rjzuKNpwWq7v8Q8VSRblQjB+87mL7VhntKlx8xkWeDgPD9xzSdfRNwO7cG4ODSUOAwg==",
+  "dgSpecHash": "TBa1wkxslgyoo+Ba17wjz4lnR4AcsJUR7G5aSemZHb64DAeAixjYbOXM8iJXSsSEfThYjl7kbdBugLo94FlKXw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj",
+  "projectFilePath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.GateWay\\TMS.GateWay.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lyagaev\\.nuget\\packages\\fluentvalidation\\11.5.2\\fluentvalidation.11.5.2.nupkg.sha512",
     "C:\\Users\\lyagaev\\.nuget\\packages\\ipaddressrange\\6.0.0\\ipaddressrange.6.0.0.nupkg.sha512",

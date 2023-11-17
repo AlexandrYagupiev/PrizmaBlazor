@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Operations\\TMS.Operations.csproj": {}
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Operations\\TMS.Operations.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Operations\\TMS.Operations.csproj": {
+    "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Operations\\TMS.Operations.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Operations\\TMS.Operations.csproj",
+        "projectUniqueName": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Operations\\TMS.Operations.csproj",
         "projectName": "TMS.Operations",
-        "projectPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Operations\\TMS.Operations.csproj",
+        "projectPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Operations\\TMS.Operations.csproj",
         "packagesPath": "C:\\Users\\lyagaev\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Operations\\obj\\",
+        "outputPath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Operations\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

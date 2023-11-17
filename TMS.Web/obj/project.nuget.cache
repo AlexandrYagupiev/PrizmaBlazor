@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3TwpvRV4NUb5SueYpuLHMvjEGJ9huOBfoQ1xufgSaoD51nBO1n99+Ode/uTqIw2DydVkFEsj4XEdifbM2/z6bQ==",
+  "dgSpecHash": "qxa113PCGODkG7K2vAQHKkOVZN6xz15aZWLPzTlzf5tgfDvgxxhW68KOnezg6F28ms7yrKt8ZGbMdMXWf8zrhA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lyagaev\\source\\repos\\tms\\TMS.Web\\TMS.Web.csproj",
+  "projectFilePath": "C:\\Users\\lyagaev\\Source\\Repos\\tms\\TMS.Web\\TMS.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lyagaev\\.nuget\\packages\\identitymodel\\6.2.0\\identitymodel.6.2.0.nupkg.sha512",
     "C:\\Users\\lyagaev\\.nuget\\packages\\keycloak.authservices.authentication\\1.6.0\\keycloak.authservices.authentication.1.6.0.nupkg.sha512",
