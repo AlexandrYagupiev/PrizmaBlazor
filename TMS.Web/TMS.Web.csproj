@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Components\Pages\TimeReport.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Components\Pages\TimeReport.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.Domain\TMS.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

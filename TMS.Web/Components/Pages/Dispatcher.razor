@@ -1,0 +1,61 @@
+﻿@page "/Dispatcher"
+@using Microsoft.AspNetCore.Components.Web
+@rendermode RenderMode.InteractiveServer
+@inject IHttpClientFactory ClientFactory
+@using System.Text.Json
+
+<PageTitle>Dispatcher</PageTitle>
+
+
+<div class="TopTables">
+    <div class="TableGroupNameAcceptContainer">
+       <strong>ПРИНЯТЬ КОНТЕЙНЕР НА ТЕРМИНАЛ</strong>
+   </div>
+    <div class="TableGroupNameIssueContainer">
+       <strong>ВЫДАТЬ КОНТЕЙНЕР С ТЕРМИНАЛА</strong>
+    </div>
+    <div class="TableGroupNameIssueStock">
+        <strong>СТОК ВЫДАЧИ</strong>
+    </div>
+    <div class="TableGroupNameAcceptContainer">
+        <strong>ТЕРМИНАЛ ПЕРЕМЕЩЕНИЯ</strong>
+    </div>
+</div>
+
+<div class="TopLine">
+    <label for="scheme">Схема:</label>
+    <select id="scheme" name="scheme">
+        <option value="Test">Test</option>
+        <option value="Test">Test</option>
+        <option value="Test">Test</option>
+    </select>
+    <input name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования "> |
+    <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
+    <input name="ButtonTest" type="button" value=" Тестовая кнопка "> |
+    <button name="ButtonDownloadDiagram" @onclick="DownloadDiagram">Загрузить схему</button>
+    <input type="text" name="ContainerNumber" placeholder="Поиск по № контейнера" />
+</div>
+
+<div class="BottomDiagram">
+
+</div>
+
+
+@code{
+
+    async Task DownloadDiagram()
+    {       
+        // HttpClient httpClient = ClientFactory.CreateClient();
+        // var request = await httpClient.GetAsync("https://tapi2.cit-ekb.ru/Api/Scheme/GetStock");
+        // var response = await request.Content.ReadAsStringAsync();
+
+        // TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(response);
+        // Console.WriteLine($"Id: {root?.id}");
+        // Console.WriteLine($"Name: {root?.name}");
+        // Console.WriteLine($"positionX: {root?.positionX}"); 
+        // Console.WriteLine($"positionY: {root?.positionY}");
+        
+
+
+    }
+}

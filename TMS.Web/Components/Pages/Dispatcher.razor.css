@@ -1,0 +1,66 @@
+﻿.TopTables {
+    height: 200px; /* высота нашего блока */
+    border: 1px solid #C1C1C1; /* размер и цвет границы блока */
+    overflow-x: scroll; /* прокрутка по горизонтали */
+}
+
+.TopLine {
+    margin-top: 5px;
+    background: #E0FFFF;
+}
+
+.BottomDiagram {
+    margin-top: 5px;
+    height: 800px; /* высота нашего блока */
+    border: 1px solid #C1C1C1; /* размер и цвет границы блока */
+    overflow-x: scroll; /* прокрутка по горизонтали */
+    overflow-y: scroll; /* прокрутка по вертикале*/
+}
+
+.TableGroupNameAcceptContainer {
+    border: 1px solid;
+    height: 40px;
+    width: 800px;
+    background: #C0C0C0;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.TableGroupNameIssueContainer {
+    border: 1px solid;
+    height: 40px;
+    width: 600px;
+    background: #C0C0C0;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    margin-left: 15px;
+}
+
+.TableGroupNameIssueStock {
+    border: 1px solid;
+    border-color: black;
+    height: 40px;
+    width: 150px;
+    background: #00CED1;
+    color: red;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    margin-left: 15px; 
+}
+
+.TableGroupNameAcceptContainer {
+    border: 1px solid;
+    height: 40px;
+    width: 800px;
+    background: #C0C0C0;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    margin-left: 50px;
+}

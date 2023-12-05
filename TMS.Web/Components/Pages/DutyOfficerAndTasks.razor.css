@@ -1,0 +1,21 @@
+﻿.TableRichtiakerAndDutyOfficer {
+    border-collapse: collapse;
+}
+
+td, th {
+    text-align: center;
+    padding: 3px;
+    border: 1px solid black;
+}
+
+.MidlLineButtons {
+    margin-top: 10px;
+}
+
+.BottomTableTitle {
+    margin-top: 10px;
+}
+
+.TableAssignedTasks {
+    margin-top: 10px;
+}
