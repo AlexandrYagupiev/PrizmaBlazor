@@ -1,0 +1,51 @@
+﻿@page "/TimeReport"
+
+<PageTitle>TimeReport</PageTitle>
+
+<div class="TopPanel">
+    <tt>Дата с: </tt> <input type="date" name="StartDateCalendar">
+    <tt>Дата по: </tt> <input type="date" name="EndDateCalendar">
+    <input name="ButtonUpdateTable" type="button" value="Обновить">
+    <input name="ButtonDownloadToExcel" type="button" value="Выгрузить в Excel">
+</div>
+
+
+
+    <table class="ReportTable">
+        <thead>
+            <tr>
+                <th>Номер заявки</th>
+                <th>Вид операции</th>
+                <th>Врем слота</th>
+                <th>Время регистрации водителя по прибытию</th>
+                <th>Время начала оформления Оператором 1</th>
+                <th>Время окончания оформления Оператором 1</th>
+                <th>Время регистрации слота Технологом 1</th>
+                <th>Время заезда авто</th>
+                <th>Время принятия задачи приемосдатчиком</th>
+                <th>Время окончания осмотра контейнера</th>
+                <th>Время поставноки контейнера в сток</th>
+                <th>Время окончания осмотра контролером</th>
+                <th>Время поставноки контейнера на авто</th>
+                <th>Время повторной регистрации водителя</th>
+                <th>Время начала оформления Оператором 2</th>
+                <th>Время окончания оформления Оператором 2</th>
+                <th>Время выезда авто с терминала</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @*  Тут будут данные для отчета *@
+                <th>Test</th>
+                <th>Test</th>
+            </tr>
+            <tr>
+                @*  Тут будут данные для отчета *@
+                <th>Test</th>
+                <th>Test</th>
+            </tr>
+        </tbody>
+    </table>
+
+@code{
+}

@@ -1,0 +1,18 @@
+﻿.TableDrivers {
+    border-collapse: collapse;
+    float: left;
+}
+
+.TableArrivingDrivers {
+    border-collapse: collapse;
+    margin-left: 25px;
+    float: left;
+}
+
+td, th {
+    text-align: center;
+    padding: 3px;
+    border: 1px solid black;
+}
+
+

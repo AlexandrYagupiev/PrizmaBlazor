@@ -1,0 +1,17 @@
+﻿.TopLineElements {
+    background: #E0FFFF;
+    white-space: nowrap;
+}
+
+
+.TableInventoryControl {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+td, th {
+    text-align: center;
+    padding: 3px;
+    border: 1px solid black;
+}
+

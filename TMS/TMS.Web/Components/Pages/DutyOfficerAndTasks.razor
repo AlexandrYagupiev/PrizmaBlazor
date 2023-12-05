@@ -1,0 +1,57 @@
+﻿@page "/DutyOfficerAndTasks"
+
+<PageTitle>DutyOfficerAndTasks</PageTitle>
+
+<table class="TableRichtiakerAndDutyOfficer">
+    <thead>
+        <tr>
+            <th>Ричстакер</th>
+            <th>Дежурный</th>          
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>1</th>
+            <th><input name="ButtonDutyOfficer1" type="button" value="Дежурный 1"></th>
+        </tr>
+        <tr>
+            <th>2</th>
+            <th><input name="ButtonDutyOfficer2" type="button" value="Дежурный 2"></th>
+        </tr>
+    </tbody>
+</table>
+
+<div class="MidlLineButtons">
+    <input name="ButtonUpdateReachstackerTask" type="button" value="Обновить задачу у ричстакера"> |
+    <input name="ButtonUpdateTaskDutyOfficer" type="button" value="Обновить задачу у дежурного">
+</div>
+
+<div class="BottomTableTitle">
+    Назначенные задачи:
+</div>
+
+<table class="TableAssignedTasks">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>№ контейнера</th>
+            <th>Откуда</th>
+            <th>Куда</th>
+            <th>Дата взятия в работу</th>
+            <th>Описание</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Test</th>
+            <th>Test</th>
+            <th>Test</th>
+            <th>Test</th>
+            <th>Test</th>
+            <th>Test</th>
+            <th><input name="ButtonCancelTask" type="button" value="Отмена задачи"></th>
+        </tr>
+    </tbody>
+</table>
+
