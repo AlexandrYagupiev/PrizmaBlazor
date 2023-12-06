@@ -3,6 +3,9 @@
 @rendermode RenderMode.InteractiveServer
 @inject IHttpClientFactory ClientFactory
 @using System.Text.Json
+@using Blazor.Extensions
+@using Blazor.Extensions.Canvas
+@using Blazor.Extensions.Canvas.Canvas2D
 
 <PageTitle>Dispatcher</PageTitle>
 
@@ -32,30 +35,36 @@
     <input name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования "> |
     <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <input name="ButtonTest" type="button" value=" Тестовая кнопка "> |
-    <button name="ButtonDownloadDiagram" @onclick="DownloadDiagram">Загрузить схему</button>
+    @* <button name="ButtonDownloadDiagram" @onclick="">Загрузить схему</button> *@
     <input type="text" name="ContainerNumber" placeholder="Поиск по № контейнера" />
 </div>
 
 <div class="BottomDiagram">
-
+    <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas>
 </div>
 
 
 @code{
+     private Canvas2DContext _context;
 
-    async Task DownloadDiagram()
-    {       
-        // HttpClient httpClient = ClientFactory.CreateClient();
-        // var request = await httpClient.GetAsync("https://tapi2.cit-ekb.ru/Api/Scheme/GetStock");
-        // var response = await request.Content.ReadAsStringAsync();
+     protected BECanvasComponent _canvasReference;
 
-        // TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(response);
-        // Console.WriteLine($"Id: {root?.id}");
-        // Console.WriteLine($"Name: {root?.name}");
-        // Console.WriteLine($"positionX: {root?.positionX}"); 
-        // Console.WriteLine($"positionY: {root?.positionY}");
+    
+
+
+    // async Task DownloadDiagram()
+    // {       
+    //     // HttpClient httpClient = ClientFactory.CreateClient();
+    //     // var request = await httpClient.GetAsync("https://tapi2.cit-ekb.ru/Api/Scheme/GetStock");
+    //     // var response = await request.Content.ReadAsStringAsync();
+
+    //     // TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(response);
+    //     // Console.WriteLine($"Id: {root?.id}");
+    //     // Console.WriteLine($"Name: {root?.name}");
+    //     // Console.WriteLine($"positionX: {root?.positionX}"); 
+    //     // Console.WriteLine($"positionY: {root?.positionY}");
         
 
 
-    }
+    // }
 }
