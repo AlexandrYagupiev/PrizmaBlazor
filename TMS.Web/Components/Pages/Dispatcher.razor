@@ -7,6 +7,7 @@
 @using Blazor.Extensions.Canvas
 @using Blazor.Extensions.Canvas.Canvas2D
 
+
 <PageTitle>Dispatcher</PageTitle>
 
 
@@ -35,7 +36,7 @@
     <input name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования "> |
     <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <input name="ButtonTest" type="button" value=" Тестовая кнопка "> |
-    @* <button name="ButtonDownloadDiagram" @onclick="">Загрузить схему</button> *@
+     @* <button name="ButtonDownloadDiagram" @onclick="ReturnTable">Загрузить схему</button> *@
     <input type="text" name="ContainerNumber" placeholder="Поиск по № контейнера" />
 </div>
 
@@ -45,26 +46,53 @@
 
 
 @code{
-     private Canvas2DContext _context;
+    private Canvas2DContext _context;
 
-     protected BECanvasComponent _canvasReference;
+    protected BECanvasComponent _canvasReference;
 
-    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        try
+        {
 
-
-    // async Task DownloadDiagram()
-    // {       
-    //     // HttpClient httpClient = ClientFactory.CreateClient();
-    //     // var request = await httpClient.GetAsync("https://tapi2.cit-ekb.ru/Api/Scheme/GetStock");
-    //     // var response = await request.Content.ReadAsStringAsync();
-
-    //     // TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(response);
-    //     // Console.WriteLine($"Id: {root?.id}");
-    //     // Console.WriteLine($"Name: {root?.name}");
-    //     // Console.WriteLine($"positionX: {root?.positionX}"); 
-    //     // Console.WriteLine($"positionY: {root?.positionY}");
-        
+            var strResponse = await SendingRequestDiagram();
+            TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(strResponse);
+            this._context = await this._canvasReference.CreateCanvas2DAsync();
 
 
-    // }
+            await this._context.SetFontAsync("28px Arial"); //Стиль отрисовки текста
+            await this._context.StrokeTextAsync(root?.name, 10, 25);  //Отрисовка имени зоны     
+            /* await this._context.StrokeRectAsync(10, 30, 400, 100); */ //Отрисовка области зоны
+            @for (int i = 1; i <= root?.columns.Count; i++)
+            {
+                await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20) * i, Convert.ToDouble(root.positionY + 30), 20, 100);
+            }
+            @for (int i = 1; i <= root?.rows.Count; i++)
+            {
+                await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY + 30)+i, Convert.ToDouble(root?.columns.Count * 20), 20);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            await DispatchExceptionAsync(ex);
+        }
+
+
+    }
+
+    async Task<string> SendingRequestDiagram()
+    {       
+        try
+        {
+            HttpClient httpClient = ClientFactory.CreateClient();
+            var request = await httpClient.GetAsync("https://tapi2.cit-ekb.ru/Api/Scheme/GetStock");
+            var response = await request.Content.ReadAsStringAsync();
+            return response;  
+        }
+        catch
+        {
+            return "Error";
+        }
+    }
 }
