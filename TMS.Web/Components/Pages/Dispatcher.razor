@@ -29,9 +29,10 @@
 <div class="TopLine">
     <label for="scheme">Схема:</label>
     <select id="scheme" name="scheme">
-        <option value="Test">Test</option>
-        <option value="Test">Test</option>
-        <option value="Test">Test</option>
+        @for (int i = 1; i <=3; i++)
+        {
+            <option value="Test">Test</option>
+        }
     </select>
     <input name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования "> |
     <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
@@ -54,23 +55,35 @@
     {
         try
         {
-
+            this._context = await this._canvasReference.CreateCanvas2DAsync();
             var strResponse = await SendingRequestDiagram();
             TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(strResponse);
-            this._context = await this._canvasReference.CreateCanvas2DAsync();
+
+            var LinstRowName = root.rows.Select(a => a.rowName).ToList();
+
+            for (int i = 0; i < LinstRowName.Count; i++)
+            {
+                await this._context.StrokeTextAsync(LinstRowName[i], Convert.ToDouble(root.positionX + 5), Convert.ToDouble(root.positionY + 50)+i*30); //Отрисовка имени ряда
+            }
 
 
-            await this._context.SetFontAsync("28px Arial"); //Стиль отрисовки текста
-            await this._context.StrokeTextAsync(root?.name, 10, 25);  //Отрисовка имени зоны     
+
+          
+
+
+            await this._context.SetFontAsync("14px Arial"); //Стиль отрисовки текста
+            await this._context.StrokeTextAsync(root?.name, Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY+12));  //Отрисовка имени зоны
             /* await this._context.StrokeRectAsync(10, 30, 400, 100); */ //Отрисовка области зоны
-            @for (int i = 1; i <= root?.columns.Count; i++)
+            for (int i = 1; i <= root?.columns.Count; i++)
             {
-                await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20) * i, Convert.ToDouble(root.positionY + 30), 20, 100);
+                await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20) * i, Convert.ToDouble(root.positionY + 30), 20, Convert.ToDouble(root?.rows.Count*30));//Отрисовка колнок
             }
-            @for (int i = 1; i <= root?.rows.Count; i++)
+            for (int j = 1; j <= root?.rows.Count; j++)
             {
-                await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY + 30)+i, Convert.ToDouble(root?.columns.Count * 20), 20);
+                await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY + 30) * j, Convert.ToDouble(root?.columns.Count * 20), 30);//Отрисовка столбцов
             }
+            
+            
 
         }
         catch (Exception ex)
