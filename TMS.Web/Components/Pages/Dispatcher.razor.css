@@ -64,3 +64,8 @@
     position: relative;
     margin-left: 50px;
 }
+
+.Table2 {
+    display: block;
+    float: right;
+}

@@ -37,62 +37,106 @@
     <input name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования "> |
     <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <input name="ButtonTest" type="button" value=" Тестовая кнопка "> |
-     @* <button name="ButtonDownloadDiagram" @onclick="ReturnTable">Загрузить схему</button> *@
+    <button name="ButtonDownloadDiagram" @onclick="HtmlTable">Загрузить схему</button>
     <input type="text" name="ContainerNumber" placeholder="Поиск по № контейнера" />
 </div>
 
 <div class="BottomDiagram">
-    <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas>
+   @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@
+    <div class="Table2">
+
+    @((MarkupString)tableHtml)
+    </div>
 </div>
 
 
+
+
 @code{
-    private Canvas2DContext _context;
+    // private Canvas2DContext _context;
 
-    protected BECanvasComponent _canvasReference;
+    // protected BECanvasComponent _canvasReference;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //     try
+    //     {
+    //         this._context = await this._canvasReference.CreateCanvas2DAsync();
+    //         var strResponse = await SendingRequestDiagram();
+    //         TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(strResponse);
+
+    //         var LinstRowName = root.rows.Select(a => a.rowName).ToList();
+
+    //         for (int i = 0; i < LinstRowName.Count; i++)
+    //         {
+    //             await this._context.StrokeTextAsync(LinstRowName[i], Convert.ToDouble(root.positionX + 5), Convert.ToDouble(root.positionY + 50)+i*30); //Отрисовка имени ряда
+    //         }    
+    //         await this._context.SetFontAsync("14px Arial"); //Стиль отрисовки текста
+    //         await this._context.StrokeTextAsync(root?.name, Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY+12));  //Отрисовка имени зоны
+    //         /* await this._context.StrokeRectAsync(10, 30, 400, 100); */ //Отрисовка области зоны
+    //         for (int i = 1; i <= root?.columns.Count; i++)
+    //         {
+    //             await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20) * i, Convert.ToDouble(root.positionY + 30), 20, Convert.ToDouble(root?.rows.Count*30));//Отрисовка колонок
+    //         }
+    //         for (int j = 1; j <= root?.rows.Count; j++)
+    //         {
+    //             await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY + 30) * j, Convert.ToDouble(root?.columns.Count * 20), 30);//Отрисовка столбцов
+    //         }
+
+
+
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         await DispatchExceptionAsync(ex);
+    //     }
+
+
+    // }
+
+
+
+    string tableHtml = "";
+
+    async Task HtmlTable()
     {
         try
         {
-            this._context = await this._canvasReference.CreateCanvas2DAsync();
             var strResponse = await SendingRequestDiagram();
             TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(strResponse);
-
-            var LinstRowName = root.rows.Select(a => a.rowName).ToList();
-
-            for (int i = 0; i < LinstRowName.Count; i++)
-            {
-                await this._context.StrokeTextAsync(LinstRowName[i], Convert.ToDouble(root.positionX + 5), Convert.ToDouble(root.positionY + 50)+i*30); //Отрисовка имени ряда
-            }
-
-
-
-          
-
-
-            await this._context.SetFontAsync("14px Arial"); //Стиль отрисовки текста
-            await this._context.StrokeTextAsync(root?.name, Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY+12));  //Отрисовка имени зоны
-            /* await this._context.StrokeRectAsync(10, 30, 400, 100); */ //Отрисовка области зоны
+            tableHtml += "<style type=\"text/css\">TABLE {border: 1px solid black; /* Рамка вокруг таблицы */ -moz-transform: rotate(0deg);-webkit-transform: rotate(45deg);-o-transform: rotate(45deg);writing-mode: tb-rl;}"
+            +"TD, TH {text-align: center;padding: 3px;border: 1px solid black; /* Поля вокруг содержимого ячеек */}"
+            +"TH {text-align: right; /* Выравнивание по правому краю */color: black; /* Цвет текста */ }</style>";
+            tableHtml+= "<strong>" + root?.name + "</strong>\n";
+            tableHtml += "<table>\n</thead>";
             for (int i = 1; i <= root?.columns.Count; i++)
             {
-                await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20) * i, Convert.ToDouble(root.positionY + 30), 20, Convert.ToDouble(root?.rows.Count*30));//Отрисовка колнок
+                tableHtml += "<tr>";
+                tableHtml += "<th>test</th>\n";
+                for (int j = 1; j <= root?.rows.Count; j++)
+                {
+                    tableHtml += "<td>Test"+i+"</td>";
+                }
+                tableHtml += "</tr>";
             }
-            for (int j = 1; j <= root?.rows.Count; j++)
-            {
-                await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY + 30) * j, Convert.ToDouble(root?.columns.Count * 20), 30);//Отрисовка столбцов
-            }
-            
-            
-
+            tableHtml += "</tr>\n</thead>";
+            tableHtml += "<tbody>\n";
+            tableHtml += "</tbody>\n";
+            tableHtml += "</table>";
         }
-        catch (Exception ex)
+        catch
         {
-            await DispatchExceptionAsync(ex);
+            tableHtml = "No";
         }
+
 
 
     }
+
+
+
+
+
 
     async Task<string> SendingRequestDiagram()
     {       
