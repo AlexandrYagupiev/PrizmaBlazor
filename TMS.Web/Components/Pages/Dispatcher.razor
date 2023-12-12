@@ -7,6 +7,7 @@
 @using Blazor.Extensions.Canvas
 @using Blazor.Extensions.Canvas.Canvas2D
 
+<body style='overflow-y:hidden;'></body> @* Убрал вертикальный Scrollbar *@
 
 <PageTitle>Dispatcher</PageTitle>
 
@@ -43,10 +44,7 @@
 
 <div class="BottomDiagram">
    @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@
-    <div class="Table2">
-
     @((MarkupString)tableHtml)
-    </div>
 </div>
 
 
@@ -104,23 +102,57 @@
         {
             var strResponse = await SendingRequestDiagram();
             TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(strResponse);
-            tableHtml += "<style type=\"text/css\">TABLE {border: 1px solid black; /* Рамка вокруг таблицы */ -moz-transform: rotate(0deg);-webkit-transform: rotate(45deg);-o-transform: rotate(45deg);writing-mode: tb-rl;}"
-            +"TD, TH {text-align: center;padding: 3px;border: 1px solid black; /* Поля вокруг содержимого ячеек */}"
-            +"TH {text-align: right; /* Выравнивание по правому краю */color: black; /* Цвет текста */ }</style>";
-            tableHtml+= "<strong>" + root?.name + "</strong>\n";
-            tableHtml += "<table>\n</thead>";
-            for (int i = 1; i <= root?.columns.Count; i++)
+
+            tableHtml += "<style type=\"text/css\">"
+            + "TABLE {border: 1px solid black; /* Рамка вокруг таблицы */ -moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;}"
+            + "TH {font-weight: bold;padding: 5px;background: #efefef;border: 1px solid #dddddd;}"
+            + "TD {border: 1px solid #dddddd;padding: 5px;}"
+            + "</style>"
+            + "<strong>" + root?.name + "</strong>"
+            + "<table>"
+            + "<thead>";
+
+            tableHtml += "<tr>";
+            tableHtml += "<th>&nbsp;</th>";
+            for (int i = 0; i < root?.columns.Count; i++)
+            {
+                for (int j = 0; j < root?.columns[i].cellsList.Count; j++)
+                {
+                    tableHtml += "<th>" + root?.columns[i].cellsList[j].stColumnsId + "</th>";
+                }
+            }
+            tableHtml += "<tr>";
+            tableHtml += "</thead>";
+
+            tableHtml += "<tbody>";
+            // for (int i = 0; i < root?.columns.Count; i++)
+            // {
+            //     tableHtml += "<tr>"
+            //     + "<th>" + root.columns[i].cellsList[i].stColumnsId + "</th>"
+            //     + "</tr>";
+            // }
+
+            // tableHtml += "<tr>"
+            // + "<th>&nbsp;</th>";
+            // for (int i = 0; i < root?.columns.Count; i++)
+            // {
+            //         for (int j = 0; j < root?.columns[i].cellsList.Count; j++)
+            //         {
+            //         tableHtml += "<th>" + root?.columns[i].cellsList[j].stColumnsId + "</th>";
+            //         }
+            // }
+            // tableHtml += "<tr>";
+
+            for (int j = 0; j < root?.rows.Count; j++)
             {
                 tableHtml += "<tr>";
-                tableHtml += "<th>test</th>\n";
-                for (int j = 1; j <= root?.rows.Count; j++)
+                tableHtml += "<th >" + root.rows[j].rowName + "</th>";
+                for (int i = 0; i < root?.columns.Count; i++)
                 {
-                    tableHtml += "<td>Test"+i+"</td>";
+                    tableHtml += "<td>" + j + "</td>";
                 }
                 tableHtml += "</tr>";
             }
-            tableHtml += "</tr>\n</thead>";
-            tableHtml += "<tbody>\n";
             tableHtml += "</tbody>\n";
             tableHtml += "</table>";
         }

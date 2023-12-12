@@ -1,6 +1,7 @@
 ﻿.ReportTable {
     border-collapse: collapse;
     margin-top: 10px;
+    overflow: auto;
 }
 
 td, th {
@@ -8,3 +9,5 @@ td, th {
     padding: 3px;
     border: 1px solid black;
 }
+
+
