@@ -1,6 +1,6 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    /*overflow-y: hidden;*/ /*для вертикального*/
+    overflow: hidden; /*убрать scrollbars у самих страниц*/
 }
 
 a, .btn-link {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TMS.Domain.Models
 {
-    public class Root
+    public class Stocks
     {
         public int id { get; set; }
         public int stSchemeId { get; set; }

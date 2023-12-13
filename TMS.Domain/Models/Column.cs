@@ -11,6 +11,7 @@ namespace TMS.Domain.Models
         public int id { get; set; }
         public int size { get; set; }
         public int ownerId { get; set; }
+        public string displayName { get; set; }
         public List<CellsList> cellsList { get; set; }
         public bool empty { get; set; }
         public int stockId { get; set; }
