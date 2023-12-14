@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,30 +9,79 @@ namespace TMS.Domain.Models
 {
     public class Container
     {
-        public int id { get; set; }
-        public int cellIdTo { get; set; }
-        public int cellId { get; set; }
-        public int defects { get; set; }
-        public int zIndex { get; set; }
-        public string number { get; set; }
-        public int type40or20 { get; set; }
-        public object numberType40or20 { get; set; }
-        public object owner { get; set; }
-        public bool export { get; set; }
-        public int weight { get; set; }
-        public int capacity { get; set; }
-        public bool acep { get; set; }
-        public DateTime manufactureDate { get; set; }
-        public DateTime inspectionDate { get; set; }
-        public object typeContainer { get; set; }
-        public object contractor { get; set; }
-        public DateTime dateOutPlan { get; set; }
-        public bool ourTransport { get; set; }
-        public string numberTrainSend { get; set; }
-        public object numberPlatformSend { get; set; }
-        public bool unparity_side { get; set; }
-        public bool empty { get; set; }
-        public int acceptanceBidId { get; set; }
-        public bool isChanged { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("cellIdTo")]
+        public int CellIdTo { get; set; }
+
+        [JsonProperty("cellId")]
+        public int CellId { get; set; }
+
+        [JsonProperty("defects")]
+        public int Defects { get; set; }
+
+        [JsonProperty("zIndex")]
+        public int ZIndex { get; set; }
+
+        [JsonProperty("number")]
+        public string Number { get; set; }
+
+        [JsonProperty("type40or20")]
+        public int Type40Or20 { get; set; }
+
+        [JsonProperty("numberType40or20")]
+        public string NumberType40Or20 { get; set; }
+
+        [JsonProperty("owner")]
+        public string Owner { get; set; }
+
+        [JsonProperty("export")]
+        public bool Export { get; set; }
+
+        [JsonProperty("weight")]
+        public int Weight { get; set; }
+
+        [JsonProperty("capacity")]
+        public int Capacity { get; set; }
+
+        [JsonProperty("acep")]
+        public bool Acep { get; set; }
+
+        [JsonProperty("manufactureDate")]
+        public DateTime ManufactureDate { get; set; }
+
+        [JsonProperty("inspectionDate")]
+        public DateTime InspectionDate { get; set; }
+
+        [JsonProperty("typeContainer")]
+        public string TypeContainer { get; set; }
+
+        [JsonProperty("contractor")]
+        public string Contractor { get; set; }
+
+        [JsonProperty("dateOutPlan")]
+        public DateTime DateOutPlan { get; set; }
+
+        [JsonProperty("ourTransport")]
+        public bool OurTransport { get; set; }
+
+        [JsonProperty("numberTrainSend")]
+        public string NumberTrainSend { get; set; }
+
+        [JsonProperty("numberPlatformSend")]
+        public int? NumberPlatformSend { get; set; }
+
+        [JsonProperty("unparity_side")]
+        public bool UnparitySide { get; set; }
+
+        [JsonProperty("empty")]
+        public bool Empty { get; set; }
+
+        [JsonProperty("acceptanceBidId")]
+        public int AcceptanceBidId { get; set; }
+
+        [JsonProperty("isChanged")]
+        public bool IsChanged { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,28 @@ namespace TMS.Domain.Models
 {
     public class Column
     {
-        public int id { get; set; }
-        public int size { get; set; }
-        public int ownerId { get; set; }
-        public string displayName { get; set; }
-        public List<CellsList> cellsList { get; set; }
-        public bool empty { get; set; }
-        public int stockId { get; set; }
-        public bool isChanged { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("size")]
+        public int Size { get; set; }
+
+        [JsonProperty("ownerId")]
+        public int OwnerId { get; set; }
+
+        [JsonProperty("displayName")]
+        public string DisplayName { get; set; }
+
+        [JsonProperty("cellsList")]
+        public List<CellsList> CellsList { get; set; }
+
+        [JsonProperty("empty")]
+        public bool Empty { get; set; }
+
+        [JsonProperty("stockId")]
+        public int StockId { get; set; }
+
+        [JsonProperty("isChanged")]
+        public bool IsChanged { get; set; }
     }
 }

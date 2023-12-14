@@ -11,9 +11,10 @@
 
 
 .BottomDiagram {
+    position: relative;
     margin-top: 5px;
     overflow: hidden;
-    width:  1625px;
+    width: 1625px;
     height: 700px; /* высота нашего блока */
     border: 1px solid #C1C1C1; /* размер и цвет границы блока */
     overflow-x: scroll; /* прокрутка по горизонтали */
