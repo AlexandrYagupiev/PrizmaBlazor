@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Components\Pages\CellHorizontal20.xaml" />
-    <None Remove="Components\Pages\CellHorizontal40.xaml" />
-    <None Remove="Components\Pages\CellVertical20.xaml" />
-    <None Remove="Components\Pages\CellVertical40.xaml" />
     <None Remove="Components\Pages\TimeReport.razor.css" />
   </ItemGroup>
 
@@ -26,21 +22,4 @@
   <ItemGroup>
     <ProjectReference Include="..\TMS.Domain\TMS.Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Components\Pages\CellHorizontal20.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Components\Pages\CellHorizontal40.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Components\Pages\CellVertical20.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Components\Pages\CellVertical40.xaml" />
-  </ItemGroup>
-
 </Project>
