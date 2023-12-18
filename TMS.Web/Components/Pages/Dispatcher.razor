@@ -107,62 +107,116 @@
         {
             var stocksList = await StocksListJson();
 
-            for (int p = 0; p < stocksList.Stocks.Count; p++)
+            for (int p = 17; p < 18; p++)
             {
-                // tableHtml += "<div style=\"left:" + (Convert.ToInt16(stocks?.positionY) + p) * 1000 + ";top:" + (Convert.ToInt16(stocks?.positionX) + p) * 2000 + "\">"; //Задаем стартовую позицию отрисовки div
-                tableHtml += "<style type=\"text/css\">"
-                + ".Table" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
-                + "TH {font-weight: bold;padding: 1px;text-align:center;font-size: 10px;}"
-                + "TD {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px}"
-                + "</style>"
-                + "<div class=\"Table" + stocksList.Stocks[p].Id + "\">"
-                + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
-                + "<table>"
-                + "<thead>";
-                tableHtml += "</thead>";
-                tableHtml += "<tbody>";
-
-                tableHtml += "<tr>";
-                tableHtml += "<th height=10></th>";
-                for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
+                if (stocksList.Stocks[p].Orientation == 1) //Отрисовка горизонтально    
                 {
-                    tableHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " height=10><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия столбцов таблицы по вертикале
-                }
-                tableHtml += "<tr>";
+                    tableHtml += "<style type=\"text/css\">"
+                    + ".Table" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
+                    + "TH {font-weight: bold;padding: 1px;text-align:center;font-size: 10px;}"
+                    + "TD {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;}"
+                    + "</style>"
+                    + "<div class=\"Table" + stocksList.Stocks[p].Id + "\">"
+                    + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
+                    + "<table>"
+                    + "<thead>";
+                    tableHtml += "</thead>";
+                    tableHtml += "<tbody>";
 
-
-                for (int j = 0; j < stocksList?.Stocks[p].Rows.Count; j++)
-                {
                     tableHtml += "<tr>";
-                    tableHtml += "<th height=10>" + stocksList?.Stocks[p].Rows[j].RowName + "</th>";
+                    tableHtml += "<th height=10></th>";
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                     {
-                        tableHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=10><div style=\"min-width:"+(stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                        tableHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " height=10><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия столбцов таблицы по вертикале
                     }
                     tableHtml += "</tr>";
 
-                }
 
-                tableHtml += "<tr>";
-                tableHtml += "<th height=10></th>";
-                for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
+                    for (int j = 0; j < stocksList?.Stocks[p].Rows.Count; j++)
+                    {
+                        if (stocksList?.Stocks[p].Rows[j].Visibility == 1)
+                        {
+                            tableHtml += "<tr>";
+                            tableHtml += "<th height=10>" + stocksList?.Stocks[p].Rows[j].RowName + "</th>";
+                            for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
+                            {
+                                if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
+                                {
+                                    tableHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=10><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                }
+                            }
+                            tableHtml += "</tr>";
+                        }
+                    }
+
+
+                    tableHtml += "<tr>";
+                    tableHtml += "<th height=10></th>";
+                    for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
+                    {
+                        tableHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " height=10><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия строк таблицы по горизонтали
+                    }
+                    tableHtml += "</tr>";
+
+                    tableHtml += "</tbody>";
+                    tableHtml += "</table>";
+                    tableHtml += "</div>";
+                }
+                else if (stocksList.Stocks[p].Orientation == 2) //Отрисовка вертикально
                 {
-                    tableHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " height=10><div style=\"min-width:"+(stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия строк таблицы по горизонтали
-                }
-                tableHtml += "<tr>";
+                    tableHtml += "<style type=\"text/css\">"
+                    + ".Table" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
+                    + "TH {font-weight: bold;padding: 1px;text-align:center;font-size: 10px;vertical-align:middle;}"
+                    + "TD {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;vertical-align:middle;}"
+                    + "</style>"
+                    + "<div class=\"Table" + stocksList.Stocks[p].Id + "\">"
+                    + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
+                    + "<table>"
+                    + "<thead>";
+                    tableHtml += "</thead>";
+                    tableHtml += "<tbody>";
 
-                tableHtml += "</tbody>";
-                tableHtml += "</table>";
-                tableHtml += "</div>";
+                    // tableHtml += "<tr>";
+                    // tableHtml += "<th width=10></th>";
+                    // for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
+                    // {
+                    //     tableHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " width=10><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия столбцов таблицы по вертикале
+                    // }
+                    // tableHtml += "</tr>";
+
+                    for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
+                    {
+                        tableHtml += "<tr>";
+                        tableHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " width=10><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод название строки (лево)
+                        for (int j = 0; j < stocksList?.Stocks[p].Rows.Count; j++)
+                        {
+                            if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
+                            {
+                                tableHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=10><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                            }
+                        }
+                        tableHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " width=10><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод название строки (право)
+                        tableHtml += "</tr>";
+                    }
+
+                    // tableHtml += "<tr>";
+                    // tableHtml += "<th width=10></th>";
+                    // for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
+                    // {
+                    //     tableHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + " width=10><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия строк таблицы по горизонтали
+                    // }
+                    // tableHtml += "</tr>";
+
+                    tableHtml += "</tbody>";
+                    tableHtml += "</table>";
+                    tableHtml += "</div>";
+                }
             }
         }
         catch (Exception ex)
         {
-            tableHtml = ex.ToString();
+            // tableHtml = ex.ToString();
         }
-
-
-
     }
 
 
