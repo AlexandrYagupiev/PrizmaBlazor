@@ -45,15 +45,14 @@
 
 <div class="BottomDiagram">
    @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@
-
-
-    @((MarkupString)tableHtml)
+    @((MarkupString)schemHtml)
 </div>
 
 
 <script>
     
 </script>
+
 
 
 
@@ -102,118 +101,154 @@
 
     async Task RotationDiv(MouseEventArgs e)
     {
-        Console.WriteLine("sad");
-      
+        Console.WriteLine("sa");     
     }
 
 
 
+    string schemHtml = "";
 
-    string tableHtml = "";
 
     async Task HtmlTable()
     {
+        schemHtml = ""; //Очистка перед отрисовкой
         try
         {
             var stocksList = await StocksListJson();
-
-            for (int p = 0; p < stocksList.Stocks.Count; p++)
+            for (int g = 0; g < stocksList.GraphicalObjectsScheme.Count; g++) //Отрисовка графических элементов
+            {
+                if (stocksList.GraphicalObjectsScheme[g].HorizontalText == true)
+                {
+                    schemHtml += "<style type=\"text/css\">"
+                  + ".GraphicalObjects" + stocksList.GraphicalObjectsScheme[g].Id + "{position:absolute;top:" + stocksList.GraphicalObjectsScheme[g].PositionY + "px;left:" + stocksList.GraphicalObjectsScheme[g].PositionX + "px;border-width:1px; border-color:black;border-style:solid;width:" + stocksList.GraphicalObjectsScheme[g].Width + "px;height:" + stocksList.GraphicalObjectsScheme[g].Height + "px;}"
+                  + ".Text" + stocksList.GraphicalObjectsScheme[g].Id + " {font-size:" + stocksList.GraphicalObjectsScheme[g].FontSize + "px;top:" + stocksList.GraphicalObjectsScheme[g].PositionTextY + "px;left:" + stocksList.GraphicalObjectsScheme[g].PositionTextX + "px;width:" + stocksList.GraphicalObjectsScheme[g].WidthTxt + "px;height:" + stocksList.GraphicalObjectsScheme[g].HeightTxt + "px;border: 1px solid black;text-align: center;overflow:hidden;position:absolute;font-weight:bold;}"
+                  + "</style>"
+                  + "<div class=\"GraphicalObjects" + stocksList.GraphicalObjectsScheme[g].Id + "\">"
+                  + "<div class=\"Text" + stocksList.GraphicalObjectsScheme[g].Id + "\">"
+                  + stocksList.GraphicalObjectsScheme[g].Text
+                  + "</div>"
+                  + "</div>";
+                }
+                else if (stocksList.GraphicalObjectsScheme[g].HorizontalText == false)
+                {
+                    schemHtml += "<style type=\"text/css\">"
+                  + ".GraphicalObjects" + stocksList.GraphicalObjectsScheme[g].Id + "{position:absolute;top:" + stocksList.GraphicalObjectsScheme[g].PositionY + "px;left:" + stocksList.GraphicalObjectsScheme[g].PositionX + "px;border-width:1px; border-color:black;border-style:solid;width:" + stocksList.GraphicalObjectsScheme[g].Width + "px;height:" + stocksList.GraphicalObjectsScheme[g].Height + "px;}"
+                  + ".Text" + stocksList.GraphicalObjectsScheme[g].Id + " {font-size:" + stocksList.GraphicalObjectsScheme[g].FontSize + "px;top:" + stocksList.GraphicalObjectsScheme[g].PositionTextY + "px;left:" + stocksList.GraphicalObjectsScheme[g].PositionTextX + "px;width:" + stocksList.GraphicalObjectsScheme[g].WidthTxt + "px;height:" + stocksList.GraphicalObjectsScheme[g].HeightTxt + "px; border: 1px solid black;text-align: center; writing-mode: vertical-lr;overflow:hidden;position:absolute;font-weight: bold;}"
+                  + "</style>"
+                  + "<div class=\"GraphicalObjects" + stocksList.GraphicalObjectsScheme[g].Id + "\">"
+                  + "<div class=\"Text" + stocksList.GraphicalObjectsScheme[g].Id + "\">"
+                  + stocksList.GraphicalObjectsScheme[g].Text
+                  + "</div>"
+                  + "</div>";
+                }
+            }
+            for (int p = 0; p < stocksList.Stocks.Count; p++)//Отрисовка таблиц
             {
                 if (stocksList.Stocks[p].Orientation == 1) //Отрисовка горизонтально    
                 {
-                    tableHtml += "<style type=\"text/css\">"
+                    schemHtml += "<style type=\"text/css\">"
                     + ".Table" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
                     + "TH {font-weight: bold;padding: 1px;text-align:center;font-size: 10px;}"
                     + "TD {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;}"
+                    + "TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
                     + "</style>"
                     + "<div class=\"Table" + stocksList.Stocks[p].Id + "\">"
                     + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
                     + "<table>"
                     + "<thead>";
-                    tableHtml += "</thead>";
-                    tableHtml += "<tbody>";
+                    schemHtml += "</thead>";
+                    schemHtml += "<tbody>";
 
-                    tableHtml += "<tr>";
-                    tableHtml += "<th height=10></th>";
+                    schemHtml += "<tr>";
+                    schemHtml += "<th height=15px></th>";
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                     {
-                        tableHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px height=10px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия столбцов таблицы по вертикале
+                        schemHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия столбцов таблицы по вертикале
                     }
-                    tableHtml += "</tr>";
+                    schemHtml += "</tr>";
 
 
                     for (int j = 0; j < stocksList?.Stocks[p].Rows.Count; j++)
                     {
                         if (stocksList?.Stocks[p].Rows[j].Visibility == 1)
                         {
-                            tableHtml += "<tr>";
-                            tableHtml += "<th height=10>" + stocksList?.Stocks[p].Rows[j].RowName + "</th>";
+                            schemHtml += "<tr>";
+                            schemHtml += "<th height=15>" + stocksList?.Stocks[p].Rows[j].RowName + "</th>";
                             for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                             {
                                 if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
                                 {
                                     if (j < stocksList?.Stocks[p].Columns[i].CellsList.Count)//Для нормальной отрисовки столбцов разной размерности
                                     {
-                                        tableHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=10px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                        schemHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                    }
+                                    else
+                                    {
+                                        schemHtml += "<th></th>";
                                     }
                                 }
-                            }                         
-                            tableHtml += "</tr>";
+                            }
+                            schemHtml += "</tr>";
                         }
                     }
 
-                 
-                    tableHtml += "<tr>";
-                    tableHtml += "<th height=10px></th>";
+
+                    schemHtml += "<tr>";
+                    schemHtml += "<th height=15px></th>";
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                     {
-                        tableHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px height=10px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия строк таблицы по горизонтали
+                        schemHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия строк таблицы по горизонтали
                     }
-                    tableHtml += "</tr>";
+                    schemHtml += "</tr>";
 
-                    tableHtml += "</tbody>";
-                    tableHtml += "</table>";
-                    tableHtml += "</div>";
+                    schemHtml += "</tbody>";
+                    schemHtml += "</table>";
+                    schemHtml += "</div>";
                 }
                 else if (stocksList.Stocks[p].Orientation == 2) //Отрисовка вертикально
                 {
-                    tableHtml += "<style type=\"text/css\">"
+                    schemHtml += "<style type=\"text/css\">"
                     + ".Table" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
                     + "TH {font-weight: bold;padding: 1px;font-size: 10px;}"
                     + "TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
+                    + "TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
                     + "</style>"
                     + "<div class=\"Table" + stocksList.Stocks[p].Id + "\">"
                     + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
                     + "<table>"
                     + "<thead>";
-                    tableHtml += "</thead>";
-                    tableHtml += "<tbody>";
+                    schemHtml += "</thead>";
+                    schemHtml += "<tbody>";
 
 
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                     {
-                        tableHtml += "<tr>";
-                        tableHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px width=10px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:10px;\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод название строки (лево)
+                        schemHtml += "<tr>";
+                        schemHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод название строки (лево)
                         for (int j = 0; j < stocksList?.Stocks[p].Rows.Count; j++)
                         {
                             if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
                             {
-                                tableHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=10px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:10px;\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                schemHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                            }
+                            else
+                            {
+                                schemHtml += "<th></th>";
                             }
                         }
-                        tableHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px width=10px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:10px;\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод название строки (право)
-                        tableHtml += "</tr>";
+                        schemHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод название строки (право)
+                        schemHtml += "</tr>";
                     }
 
-                    tableHtml += "</tbody>";
-                    tableHtml += "</table>";
-                    tableHtml += "</div>";
+                    schemHtml += "</tbody>";
+                    schemHtml += "</table>";
+                    schemHtml += "</div>";
                 }
-            }
+            }           
         }
         catch (Exception ex)
         {
-            // tableHtml = ex.ToString();
+            // schemHtml = ex.ToString();
         }
     }
 
