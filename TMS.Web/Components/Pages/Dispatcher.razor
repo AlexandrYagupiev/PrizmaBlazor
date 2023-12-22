@@ -29,7 +29,7 @@
 
 
 <div class="TopLine">
-    <label for="SchemeSelectLabel">Схема:</label>
+    <label for="SchemeSelect">Схема:</label>
     <select id="SchemeSelect" name="SchemeSelect">
         @for (int i = 1; i <=3; i++)
         {
@@ -38,21 +38,59 @@
     </select>
     <input name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования "> |
     <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
-    <input name="ButtonRotation" type="button" @onclick="RotationDiv" value="Поворот"> |
-    <button name="ButtonDownloadDiagram" @onclick="HtmlTable">Загрузить схему</button>
+    <button name="ButtonRotation" onclick="rotateElem()">Поворот</button> |
+    <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
     <input type="text" name="ContainerNumber" placeholder="Поиск по № контейнера" />
 </div>
 
-<div class="BottomDiagram">
+<div class="BottomDiagram" onmousedown="handChange" onmouseup="grabChange">
    @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@
     @((MarkupString)schemHtml)
 </div>
 
 
-<script>
-    
+<script>//Поворот элемента
+    let x = 0;
+    function rotateElem() {
+        x += 45;
+        document.querySelector('.Table1').style.transform
+            = "rotate("+x+"deg)";
+    }
 </script>
 
+<script>//Cкролл BottomDiagram при зажатий левой кнопки мыши    
+    (function () {
+        let speed = 1; // Скорость скролла.
+        let scroll = document.querySelector('.BottomDiagram');
+        let left = 0; // отпустили мышку - сохраняем положение скролла
+        let top = 0;
+        let drag = false;
+        let coorX = 0; // нажали мышку - сохраняем координаты.
+        let coorY = 0;
+        event.preventDefault();
+            scroll.addEventListener('mousedown', function (e) {
+            if (event.button == 0 || event.button == 1) {
+                drag = true;
+                coorX = e.pageX - this.offsetLeft;
+                coorY = e.pageY - this.offsetTop;
+            }
+            });
+            document.addEventListener('mouseup', function () {
+            if (event.button == 0 || event.button == 1)
+            {
+                drag = false;
+                left = scroll.scrollLeft;
+                top = scroll.scrollTop;
+            }
+            });
+            scroll.addEventListener('mousemove', function (e) {
+                if (drag) {
+                    this.scrollLeft = left - (e.pageX - this.offsetLeft - coorX) * speed;
+                    this.scrollTop = top - (e.pageY - this.offsetTop - coorY) * speed;
+                }
+            });
+    })();
+</script>
 
 
 
@@ -99,17 +137,17 @@
     // }
 
 
-    async Task RotationDiv(MouseEventArgs e)
-    {
-        Console.WriteLine("sa");     
-    }
 
+    async Task RotationDiv()
+    {
+        
+    }
 
 
     string schemHtml = "";
 
 
-    async Task HtmlTable()
+    async Task HtmlShems()
     {
         schemHtml = ""; //Очистка перед отрисовкой
         try
@@ -133,7 +171,7 @@
                 {
                     schemHtml += "<style type=\"text/css\">"
                   + ".GraphicalObjects" + stocksList.GraphicalObjectsScheme[g].Id + "{position:absolute;top:" + stocksList.GraphicalObjectsScheme[g].PositionY + "px;left:" + stocksList.GraphicalObjectsScheme[g].PositionX + "px;border-width:1px; border-color:black;border-style:solid;width:" + stocksList.GraphicalObjectsScheme[g].Width + "px;height:" + stocksList.GraphicalObjectsScheme[g].Height + "px;}"
-                  + ".Text" + stocksList.GraphicalObjectsScheme[g].Id + " {font-size:" + stocksList.GraphicalObjectsScheme[g].FontSize + "px;top:" + stocksList.GraphicalObjectsScheme[g].PositionTextY + "px;left:" + stocksList.GraphicalObjectsScheme[g].PositionTextX + "px;width:" + stocksList.GraphicalObjectsScheme[g].WidthTxt + "px;height:" + stocksList.GraphicalObjectsScheme[g].HeightTxt + "px; border: 1px solid black;text-align: center; writing-mode: vertical-lr;overflow:hidden;position:absolute;font-weight: bold;}"
+                  + ".Text" + stocksList.GraphicalObjectsScheme[g].Id + " {font-size:" + stocksList.GraphicalObjectsScheme[g].FontSize + "px;top:" + stocksList.GraphicalObjectsScheme[g].PositionTextY + "px;left:" + stocksList.GraphicalObjectsScheme[g].PositionTextX + "px;width:" + stocksList.GraphicalObjectsScheme[g].WidthTxt + "px;height:" + stocksList.GraphicalObjectsScheme[g].HeightTxt + "px; border: 1px solid black;text-align: center; writing-mode: vertical-lr;overflow:hidden;position:absolute;font-weight:bold;}"
                   + "</style>"
                   + "<div class=\"GraphicalObjects" + stocksList.GraphicalObjectsScheme[g].Id + "\">"
                   + "<div class=\"Text" + stocksList.GraphicalObjectsScheme[g].Id + "\">"
@@ -248,7 +286,7 @@
         }
         catch (Exception ex)
         {
-            // schemHtml = ex.ToString();
+            schemHtml = ex.ToString();
         }
     }
 

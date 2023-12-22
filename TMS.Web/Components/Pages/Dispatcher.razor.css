@@ -9,6 +9,7 @@
     background: #E0FFFF;
 }
 
+
 .BottomDiagram {
     position: relative;
     margin-top: 5px;
@@ -17,7 +18,12 @@
     border: 1px solid #C1C1C1; /* размер и цвет границы блока */
     overflow-x: scroll; /* прокрутка по горизонтали */
     overflow-y: scroll; /* прокрутка по вертикале*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
 
 .TableGroupNameAcceptContainer {
     border: 1px solid;
