@@ -43,17 +43,18 @@
     <input type="text" name="ContainerNumber" placeholder="Поиск по № контейнера" />
 </div>
 
-<div class="BottomDiagram" onmousedown="handChange" onmouseup="grabChange">
+<div class="BottomDiagram" id="BottomDiagram">
    @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@
     @((MarkupString)schemHtml)
 </div>
 
 
-<script>//Поворот элемента
+<script>
+    let activeEnement = ".Table1";  
     let x = 0;
-    function rotateElem() {
+    function rotateElem() {//Поворот элемента
         x += 45;
-        document.querySelector('.Table1').style.transform
+        document.querySelector(activeEnement).style.transform
             = "rotate("+x+"deg)";
     }
 </script>
@@ -91,6 +92,21 @@
             });
     })();
 </script>
+
+
+<script>
+    var childElement = document.querySelector(".BottomDiagram");
+   
+
+
+   
+
+    
+       
+
+
+</script>
+
 
 
 
@@ -190,7 +206,7 @@
                     + "TD {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;}"
                     + "TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
                     + "</style>"
-                    + "<div class=\"Table" + stocksList.Stocks[p].Id + "\">"
+                    + "<div class=\"Table" + stocksList.Stocks[p].Id + "\" id=\"Table" + stocksList.Stocks[p].Id + "\">"
                     + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
                     + "<table>"
                     + "<thead>";
@@ -251,7 +267,7 @@
                     + "TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
                     + "TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
                     + "</style>"
-                    + "<div class=\"Table" + stocksList.Stocks[p].Id + "\">"
+                    + "<div class=\"Table" + stocksList.Stocks[p].Id + "\" id=\"Table" + stocksList.Stocks[p].Id + "\">"
                     + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
                     + "<table>"
                     + "<thead>";
