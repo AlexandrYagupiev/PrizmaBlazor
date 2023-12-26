@@ -38,7 +38,6 @@
     </select>
     <input name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования "> |
     <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
-    <button name="ButtonRotation" onclick="rotateElem()">Поворот</button> |
     <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
     <input type="text" name="ContainerNumber" placeholder="Поиск по № контейнера" />
 </div>
@@ -49,34 +48,27 @@
 </div>
 
 
-<script>
-    let activeEnement = ".Table1";  
-    let x = 0;
-    function rotateElem() {//Поворот элемента
-        x += 45;
-        document.querySelector(activeEnement).style.transform
-            = "rotate("+x+"deg)";
-    }
-</script>
+
 
 <script>//Cкролл BottomDiagram при зажатий левой кнопки мыши    
     (function () {
         let speed = 1; // Скорость скролла.
-        let scroll = document.querySelector('.BottomDiagram');
-        let left = 0; // отпустили мышку - сохраняем положение скролла
-        let top = 0;
+        let scroll = document.querySelector('.BottomDiagram'); //зона скролла
+        let left = 0; // отпустили мышку - сохраняем положение скролла x
+        let top = 0;  // отпустили мышку - сохраняем положение скролла y
         let drag = false;
-        let coorX = 0; // нажали мышку - сохраняем координаты.
-        let coorY = 0;
+        let coorX = 0; // нажали мышку - сохраняем координаты x.
+        let coorY = 0; // нажали мышку - сохраняем координаты y.
         event.preventDefault();
             scroll.addEventListener('mousedown', function (e) {
             if (event.button == 0 || event.button == 1) {
                 drag = true;
                 coorX = e.pageX - this.offsetLeft;
                 coorY = e.pageY - this.offsetTop;
+                cursor: grab;
             }
             });
-            document.addEventListener('mouseup', function () {
+            document.addEventListener('mouseup', function (e) {
             if (event.button == 0 || event.button == 1)
             {
                 drag = false;
@@ -93,18 +85,16 @@
     })();
 </script>
 
+<script> //Поворот таблиц по dblclick
+    let activeEnement = "";
+    let x = 0;
 
-<script>
-    var childElement = document.querySelector(".BottomDiagram");
-   
-
-
-   
-
-    
-       
-
-
+    document.addEventListener('dblclick', function (event) {
+        activeEnement =".div"+event.target.getAttribute('Class');
+        x += 45;
+        document.querySelector(activeEnement).style.transform
+            = "rotate(" + x + "deg)";       
+    });   
 </script>
 
 
@@ -201,12 +191,12 @@
                 if (stocksList.Stocks[p].Orientation == 1) //Отрисовка горизонтально    
                 {
                     schemHtml += "<style type=\"text/css\">"
-                    + ".Table" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
                     + "TH {font-weight: bold;padding: 1px;text-align:center;font-size: 10px;}"
                     + "TD {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;}"
                     + "TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
                     + "</style>"
-                    + "<div class=\"Table" + stocksList.Stocks[p].Id + "\" id=\"Table" + stocksList.Stocks[p].Id + "\">"
+                    + "<div class=\"divTable" + stocksList.Stocks[p].Id + "\" id=\"Table" + stocksList.Stocks[p].Id + "\">"
                     + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
                     + "<table>"
                     + "<thead>";
@@ -217,7 +207,7 @@
                     schemHtml += "<th height=15px></th>";
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                     {
-                        schemHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия столбцов таблицы по вертикале
+                        schemHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\" class=\"Table" + stocksList.Stocks[p].Id + "\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия столбцов таблицы по вертикале
                     }
                     schemHtml += "</tr>";
 
@@ -234,7 +224,7 @@
                                 {
                                     if (j < stocksList?.Stocks[p].Columns[i].CellsList.Count)//Для нормальной отрисовки столбцов разной размерности
                                     {
-                                        schemHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                        schemHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\" class=\"Table" + stocksList.Stocks[p].Id + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
                                     }
                                     else
                                     {
@@ -251,7 +241,7 @@
                     schemHtml += "<th height=15px></th>";
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                     {
-                        schemHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия строк таблицы по горизонтали
+                        schemHtml += "<th width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\" class=\"Table" + stocksList.Stocks[p].Id + "\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод названия строк таблицы по горизонтали
                     }
                     schemHtml += "</tr>";
 
@@ -262,12 +252,12 @@
                 else if (stocksList.Stocks[p].Orientation == 2) //Отрисовка вертикально
                 {
                     schemHtml += "<style type=\"text/css\">"
-                    + ".Table" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
                     + "TH {font-weight: bold;padding: 1px;font-size: 10px;}"
                     + "TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
                     + "TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
                     + "</style>"
-                    + "<div class=\"Table" + stocksList.Stocks[p].Id + "\" id=\"Table" + stocksList.Stocks[p].Id + "\">"
+                    + "<div class=\"divTable" + stocksList.Stocks[p].Id + "\" id=\"Table" + stocksList.Stocks[p].Id + "\">"
                     + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
                     + "<table>"
                     + "<thead>";
@@ -283,14 +273,14 @@
                         {
                             if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
                             {
-                                schemHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                schemHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\"class=\"Table" + stocksList.Stocks[p].Id + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
                             }
                             else
                             {
                                 schemHtml += "<th></th>";
                             }
                         }
-                        schemHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод название строки (право)
+                        schemHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\"class=\"Table" + stocksList.Stocks[p].Id + "\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод название строки (право)
                         schemHtml += "</tr>";
                     }
 

@@ -24,6 +24,10 @@
     user-select: none;
 }
 
+/*.BottomDiagram:active {
+    cursor: grabbing;
+}*/
+
 
 .TableGroupNameAcceptContainer {
     border: 1px solid;
