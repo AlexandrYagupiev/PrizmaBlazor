@@ -69,60 +69,47 @@
                 <th>Статус</th>
             </tr>
         </thead>
-        <tbody>  
-            
+        <tbody>             
         </tbody>
     </table>
 
 
 
+
+
 <script>
-    // let activeElement = "";//Элемент который выбрали
-    // let doc = document.querySelector('.BottomDiagram'); //зона для работы click
+    let doc = document.querySelector('.BottomDiagram'); //зона для работы click
+    let div = "";
+    let elTop = 0;
+    let elLeft = 0;
 
-    // doc.addEventListener('click', function (event) {
-    //     activeElement = ".div" + event.target.getAttribute('Class');
+    doc.addEventListener('click', function (event) { //Получение названия div при событий click
+        div = ".div" + event.target.getAttribute('Class');       
+        elTop = doc.querySelector(div).offsetTop;
+        elLeft = doc.querySelector(div).offsetLeft;
+    });
 
-    // });
+  
 
-    // let div = document.querySelector("div");
-
-    // div.addEventListener('mousedown', function (evt) {
-    //     evt.preventDefault();
-
-    //     // Отслеживаем начальное положение блока по его координатам
-    //     let xStart = evt.clientX;
-    //     let yStart = evt.clientY;
-
-
-    //     var onMouseMove = function (evtMove) {
-    //         evtMove.preventDefault();
-
-    //         // Отслеживаем изменение координат мыши
-    //         var xNew = xStart - evtMove.clientX;
-    //         var yNew = yStart - evtMove.clientY;
-
-    //         xStart = evtMove.clientX;
-    //         yStart = evtMove.clientY;
-
-    //         div.style.top = (div.offsetTop - yNew) + 'px';
-    //         div.style.left = (div.offsetLeft - xNew) + 'px';
-
-    //     }
-
-    //     var onMouseUp = function (evtUp) {
-    //         // Отменяем подписку на события
-    //         document.removeEventListener('mousemove', onMouseMove);
-    //         document.removeEventListener('mouseup', onMouseUp);
-    //     }
-
-
-    //     document.addEventListener('mousemove', onMouseMove)
-    //     document.addEventListener('mouseup', onMouseUp)
-    // })
-
-
-
+    function moveElement(evt) {//Перемещение div клавишами WASD
+        let keypress = evt.keyCode;
+        if (div != null) //Проверка что div задан
+        {
+            if (keypress == 87) { //Передвижение div вверх клавишей W
+                doc.querySelector(div).style.top = (elTop = elTop - 5) + 'px';
+            }
+            if (keypress == 83) { //Передвижение div вниз клавишей S
+                doc.querySelector(div).style.top = (elTop = elTop + 5) + 'px';
+            }
+            if (keypress == 65) { //Передвижение div влева клавишей A
+                doc.querySelector(div).style.left = (elLeft = elLeft - 5) + 'px';
+            }
+            if (keypress == 68) { //Передвижение div вправа клавишей D
+                doc.querySelector(div).style.left = (elLeft = elLeft + 5) + 'px';
+            }
+        }
+    }
+    document.addEventListener("keydown", moveElement);
 </script>
 
 
