@@ -44,13 +44,58 @@
 
 <div class="BottomDiagram" id="BottomDiagram">
    @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@
+
     @((MarkupString)schemHtml)
 </div>
 
 
 
 <script>
-   
+    let activeElement = "";//Элемент который выбрали
+    let doc = document.querySelector('.BottomDiagram'); //зона для работы click
+
+    doc.addEventListener('click', function (event) {
+        activeElement = ".div" + event.target.getAttribute('Class');
+
+    });
+
+    let div = document.querySelector("div");
+
+    div.addEventListener('mousedown', function (evt) {
+        evt.preventDefault();
+
+        // Отслеживаем начальное положение блока по его координатам
+        let xStart = evt.clientX;
+        let yStart = evt.clientY;
+
+
+        var onMouseMove = function (evtMove) {
+            evtMove.preventDefault();
+
+            // Отслеживаем изменение координат мыши
+            var xNew = xStart - evtMove.clientX;
+            var yNew = yStart - evtMove.clientY;
+
+            xStart = evtMove.clientX;
+            yStart = evtMove.clientY;
+
+            div.style.top = (div.offsetTop - yNew) + 'px';
+            div.style.left = (div.offsetLeft - xNew) + 'px';
+
+        }
+
+        var onMouseUp = function (evtUp) {
+            // Отменяем подписку на события
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+
+
+        document.addEventListener('mousemove', onMouseMove)
+        document.addEventListener('mouseup', onMouseUp)
+    })
+
+
 
 </script>
 
@@ -112,13 +157,6 @@
 
 
 @code{
-    int currentCount;
-    void IncrementCount(MouseEventArgs e)
-    {
-        if (e.CtrlKey == true) currentCount = currentCount + 10;
-        else currentCount++;
-    }
-
     // private Canvas2DContext _context;
 
     // protected BECanvasComponent _canvasReference;
@@ -159,18 +197,7 @@
 
 
     // }
-
-
-
-    async Task RotationDiv()
-    {
-        
-    }
-
-
     string schemHtml = "";
-
-
     async Task HtmlShems()
     {
         schemHtml = ""; //Очистка перед отрисовкой
