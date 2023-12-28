@@ -14,7 +14,7 @@
     position: relative;
     margin-top: 5px;
     overflow: hidden;
-    height: 660px; /* высота нашего блока */
+    height: 500px; /* высота нашего блока */
     border: 1px solid #C1C1C1; /* размер и цвет границы блока */
     overflow-x: scroll; /* прокрутка по горизонтали */
     overflow-y: scroll; /* прокрутка по вертикале*/
@@ -27,6 +27,26 @@
 /*.BottomDiagram:active {
     cursor: grabbing;
 }*/
+
+.BottomTable {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #dddddd;
+    border-collapse: collapse;
+}
+
+    .BottomTable th {
+        font-weight: bold;
+        padding: 5px;
+        background: White;
+        border: 1px solid #dddddd;
+    }
+
+.BottomTable td {
+    border: 1px solid #dddddd;
+    padding: 5px;
+}
+
 
 
 .TableGroupNameAcceptContainer {
@@ -65,7 +85,7 @@
     margin-left: 15px; 
 }
 
-.TableGroupNameAcceptContainer {
+.TableGroupNameMovementTerminal {
     border: 1px solid;
     height: 40px;
     width: 800px;
@@ -73,6 +93,4 @@
     text-align: center;
     vertical-align: middle;
     display: table-cell;
-    position: relative;
-    margin-left: 50px;
 }
