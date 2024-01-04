@@ -35,12 +35,12 @@
     border-collapse: collapse;
 }
 
-    .BottomTable th {
-        font-weight: bold;
-        padding: 5px;
-        background: White;
-        border: 1px solid #dddddd;
-    }
+.BottomTable th {
+    font-weight: bold;
+    padding: 5px;
+    background: White;
+    border: 1px solid #dddddd;
+}
 
 .BottomTable td {
     border: 1px solid #dddddd;
@@ -51,7 +51,7 @@
 
 .TableGroupNameAcceptContainer {
     border: 1px solid;
-    height: 40px;
+    height: 30%;
     width: 800px;
     background: #C0C0C0;
     text-align: center;
@@ -61,7 +61,7 @@
 
 .TableGroupNameIssueContainer {
     border: 1px solid;
-    height: 40px;
+    height: 20%;
     width: 600px;
     background: #C0C0C0;
     text-align: center;
@@ -74,7 +74,7 @@
 .TableGroupNameIssueStock {
     border: 1px solid;
     border-color: black;
-    height: 40px;
+    height: 30%;
     width: 150px;
     background: #00CED1;
     color: red;
@@ -82,12 +82,12 @@
     vertical-align: middle;
     display: table-cell;
     position: relative;
-    margin-left: 15px; 
+    margin-left: 15px;
 }
 
 .TableGroupNameMovementTerminal {
     border: 1px solid;
-    height: 40px;
+    height: 20%;
     width: 800px;
     background: #C0C0C0;
     text-align: center;

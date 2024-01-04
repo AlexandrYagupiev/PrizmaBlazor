@@ -39,7 +39,7 @@
     <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
     <input type="text" name="ContainerNumber" id="ContainerNumber" placeholder="Поиск по № контейнера" />
-    <input type="text" name="RotationDegree" id="RotationDegree" placeholder="Градус поворота" />
+    <input type="text" name="RotationDegree" id="RotationDegree" placeholder="Градус поворота"/>
 </div>
 
 <div class="BottomDiagram" id="BottomDiagram">
@@ -48,7 +48,7 @@
     @((MarkupString)schemHtml)
 </div>
 
-    <table class="BottomTable" id="BottomTable">
+    <table class="BottomTable" id="BottomTable"> @* Таблица контейнеров *@
         <thead>
             <tr>
                 <th>Этаж</th>
@@ -69,9 +69,11 @@
                 <th>Статус</th>
             </tr>
         </thead>
-        <tbody>             
+        <tbody>   
+            
         </tbody>
     </table>
+
 
 
 
@@ -80,11 +82,18 @@
 <script>
     let doc = document.querySelector('.BottomDiagram'); //зона для работы click
     let div = "";
+    let positionZone = "";
     let elTop = 0;
     let elLeft = 0;
+    let containerNumberText = document.getElementById('ContainerNumber'); //Текстовое поле Поиск по № контейнера
+    let activeElement = "";//Элемент который выбрали для поворота
+    let degree = "0";//Градус поворота
 
     doc.addEventListener('click', function (event) { //Получение названия div при событий click
-        div = ".div" + event.target.getAttribute('Class');       
+        div = ".div" + event.target.getAttribute('Class');
+        // alert(event.currentTarget.getAttribute('Class')); //Проверка работы currentTarget
+        positionZone = event.target.getAttribute('Id');
+        containerNumberText.value = positionZone;
         elTop = doc.querySelector(div).offsetTop;
         elLeft = doc.querySelector(div).offsetLeft;
     });
@@ -101,11 +110,25 @@
             if (keypress == 83) { //Передвижение div вниз клавишей S
                 doc.querySelector(div).style.top = (elTop = elTop + 5) + 'px';
             }
-            if (keypress == 65) { //Передвижение div влева клавишей A
+            if (keypress == 65) { //Передвижение div влево клавишей A
                 doc.querySelector(div).style.left = (elLeft = elLeft - 5) + 'px';
             }
-            if (keypress == 68) { //Передвижение div вправа клавишей D
+            if (keypress == 68) { //Передвижение div вправо клавишей D
                 doc.querySelector(div).style.left = (elLeft = elLeft + 5) + 'px';
+            }
+            if (keypress == 81) { //Поворот div влево клавишей Q
+                degree -= 5;
+                if (degree != null) {
+                    doc.querySelector(div).style.transform
+                        = "rotate(" + degree + "deg)";
+                }
+            }
+            if (keypress == 69) { //Поворот div вправо клавишей E
+                degree += 5;
+                if (degree != null) {
+                    doc.querySelector(div).style.transform
+                        = "rotate(" + degree + "deg)";
+                }
             }
         }
     }
@@ -151,25 +174,16 @@
     })();
 </script>
 
-<script> //Поворот таблиц по dblclick
-    let activeElement = "";//Элемент который выбрали
-    let degree = "0";//Градус поворота
-    let doc = document.querySelector('.BottomDiagram'); //зона для работы dblclick
-
-    doc.addEventListener('dblclick', function (event) {
-        activeElement = ".div" + event.target.getAttribute('Class');
-        degree = document.getElementById('RotationDegree').value;
-        if (degree != null) {
-            doc.querySelector(activeElement).style.transform
-            = "rotate(" + degree + "deg)";
-        }
-    });   
-</script>
-
-
 
 
 @code{
+    string schemHtml = ""; //HTML код для заполнения div BottomDiagram
+    string topTableBodyHtml = "";  //HTML код для заполнения тела таблицы BottomTable
+    string positionZone = "";
+
+
+
+
     // private Canvas2DContext _context;
 
     // protected BECanvasComponent _canvasReference;
@@ -210,7 +224,6 @@
 
 
     // }
-    string schemHtml = "";
     async Task HtmlShems()
     {
         schemHtml = ""; //Очистка перед отрисовкой
@@ -282,7 +295,7 @@
                                 {
                                     if (j < stocksList?.Stocks[p].Columns[i].CellsList.Count)//Для нормальной отрисовки столбцов разной размерности
                                     {
-                                        schemHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\" class=\"Table" + stocksList.Stocks[p].Id + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                        schemHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\" class=\"Table" + stocksList.Stocks[p].Id + "\" id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
                                     }
                                     else
                                     {
@@ -331,7 +344,7 @@
                         {
                             if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
                             {
-                                schemHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\"class=\"Table" + stocksList.Stocks[p].Id + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                schemHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\"class=\"Table" + stocksList.Stocks[p].Id + "\"id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
                             }
                             else
                             {
@@ -351,6 +364,18 @@
         catch (Exception ex)
         {
             schemHtml = ex.ToString();
+        }
+    }
+
+    async Task HtmlTableBody()
+    {
+        try
+        {
+
+        }
+        catch (Exception ex)
+        {
+            
         }
     }
 
