@@ -1,5 +1,6 @@
 ﻿.TableRichtiakerAndDutyOfficer {
     border-collapse: collapse;
+    width:100%;
 }
 
 td, th {
@@ -18,4 +19,5 @@ td, th {
 
 .TableAssignedTasks {
     margin-top: 10px;
+    width: 100%;
 }

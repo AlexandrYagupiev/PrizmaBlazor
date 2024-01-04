@@ -39,7 +39,6 @@
     <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
     <input type="text" name="ContainerNumber" id="ContainerNumber" placeholder="Поиск по № контейнера" />
-    <input type="text" name="RotationDegree" id="RotationDegree" placeholder="Градус поворота"/>
 </div>
 
 <div class="BottomDiagram" id="BottomDiagram">
@@ -69,8 +68,8 @@
                 <th>Статус</th>
             </tr>
         </thead>
-        <tbody>   
-            
+        <tbody>
+        @((MarkupString)topTableBodyHtml)
         </tbody>
     </table>
 
@@ -81,10 +80,10 @@
 
 <script>
     let doc = document.querySelector('.BottomDiagram'); //зона для работы click
-    let div = "";
-    let positionZone = "";
-    let elTop = 0;
-    let elLeft = 0;
+    let div = ""; //Div в котором производим манипуляции
+    let positionZone = "";//Позиция ячейки в таблице
+    let elTop = 0;//Координата Y для div
+    let elLeft = 0;//Координата X для div
     let containerNumberText = document.getElementById('ContainerNumber'); //Текстовое поле Поиск по № контейнера
     let activeElement = "";//Элемент который выбрали для поворота
     let degree = "0";//Градус поворота
@@ -129,6 +128,9 @@
                     doc.querySelector(div).style.transform
                         = "rotate(" + degree + "deg)";
                 }
+            }
+            if (keypress == 13) {
+                
             }
         }
     }
@@ -180,7 +182,6 @@
     string schemHtml = ""; //HTML код для заполнения div BottomDiagram
     string topTableBodyHtml = "";  //HTML код для заполнения тела таблицы BottomTable
     string positionZone = "";
-
 
 
 

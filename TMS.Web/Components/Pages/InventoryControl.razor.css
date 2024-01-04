@@ -1,12 +1,14 @@
 ﻿.TopLineElements {
     background: #E0FFFF;
     white-space: nowrap;
+    width:100%;
 }
 
 
 .TableInventoryControl {
     border-collapse: collapse;
     margin-top: 10px;
+    width: 100%;
 }
 
 td, th {
@@ -15,3 +17,14 @@ td, th {
     border: 1px solid black;
 }
 
+.TextOwnerKT {
+    width: 80px;
+}
+
+.TextSearchKT {
+    width: 80px;
+}
+
+.TextSearchpAplicationNumber {
+    width: 80px;
+}
