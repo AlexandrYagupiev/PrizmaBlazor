@@ -24,15 +24,14 @@
     user-select: none;
 }
 
-/*.BottomDiagram:active {
-    cursor: grabbing;
-}*/
 
 .BottomTable {
     width: 100%;
     margin-bottom: 20px;
     border: 1px solid #dddddd;
     border-collapse: collapse;
+    text-align: center;
+    overflow-y: scroll;
 }
 
 .BottomTable th {
@@ -41,11 +40,6 @@
     background: White;
     border: 1px solid #dddddd;
 }
-
-    .BottomTable td {
-        border: 1px solid #dddddd;
-        padding: 5px;
-    }
 
 
 

@@ -35,16 +35,17 @@
             <option value="Test">Test</option>
         }
     </select>
-    <input name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования "> |
-    <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
+    <input id="ButtonChangeMode" name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования " @onclick="HTmlPopupMenu"> |
+    <input id="ButtonUpdateSchema" name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
     <button name="ButtonDownloadTable" @onclick="HtmlTableBody">Загрузить таблицу</button>
     <input type="text" name="ContainerNumber" id="ContainerNumber" class="ContainerNumber" placeholder="Поиск по № контейнера"/>
 </div>
 
-<div class="BottomDiagram" id="BottomDiagram">
-   @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@
+@((MarkupString)popupMenu)
 
+<div class="BottomDiagram" id="BottomDiagram">
+   @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@ 
     @((MarkupString)schemHtml)
 </div>
 
@@ -183,7 +184,7 @@
     string schemHtml = ""; //HTML код для заполнения div BottomDiagram
     string topTableBodyHtml = "";  //HTML код для заполнения тела таблицы BottomTable
     string positionZone = "Зона 5-1-Я";
-
+    string popupMenu = "";
 
 
     // private Canvas2DContext _context;
@@ -265,9 +266,9 @@
                 {
                     schemHtml += "<style type=\"text/css\">"
                     + ".divTable" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
-                    + "TH {font-weight: bold;padding: 1px;text-align:center;font-size: 10px;}"
-                    + "TD {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;}"
-                    + "TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + " TH {font-weight: bold;padding: 1px;text-align:center;font-size: 10px;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + " TD {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + " TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
                     + "</style>"
                     + "<div class=\"divTable" + stocksList.Stocks[p].Id + "\" id=\"Table" + stocksList.Stocks[p].Id + "\">"
                     + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
@@ -326,9 +327,9 @@
                 {
                     schemHtml += "<style type=\"text/css\">"
                     + ".divTable" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
-                    + "TH {font-weight: bold;padding: 1px;font-size: 10px;}"
-                    + "TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
-                    + "TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + " TH {font-weight: bold;padding: 1px;font-size: 10px;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + " TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + " TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
                     + "</style>"
                     + "<div class=\"divTable" + stocksList.Stocks[p].Id + "\" id=\"Table" + stocksList.Stocks[p].Id + "\">"
                     + "<strong>" + stocksList.Stocks[p].Name + "</strong>"
@@ -369,12 +370,25 @@
         }
     }
 
+    async Task HTmlPopupMenu()
+    {
+        // popupMenu += "";
+        // popupMenu += "<style type=\"text/css\">"
+        // + ".divPopupMenu {position:absolute;top:30%;right:30px;border-width:1px; border-color:black;border-style:solid; width:50%;height:50%;background-color:grey;}"
+        // + "</style>"
+        // + "<div class=\"divPopupMenu\"></div>";
+
+    }
+
     async Task HtmlTableBody()
     {
         topTableBodyHtml = "";  //Очистка перед отрисовкой
         try
         {
             var stocksList = await StocksListJson();
+            topTableBodyHtml += "<style type=\"text/css\">"
+            + ".BottomTable TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
+            +"</style>";
             for (int p = 0; p < stocksList.Stocks.Count; p++)//Отрисовка тела таблицы
             {
                 for (int i = 0; i < stocksList.Stocks[p].Columns.Count; i++)
@@ -409,7 +423,7 @@
                                 topTableBodyHtml += "<td>Поезд: , ст.: </td>";//Заполнение Заявка КТ 2.0 (временное)
                                 topTableBodyHtml += "<td>Пусто</td>";//Заполнение Направление (временное)
                                 topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].AcceptanceBidId + "</td>";//Заполнение Номер заявки
-                                topTableBodyHtml += "<td>Пусто</td>";//Заполнение Статус (временное) 
+                                topTableBodyHtml += "<td>Пусто</td>";//Заполнение Статус (временное)
                                 topTableBodyHtml += "</tr>";
                             }
                            
