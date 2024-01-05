@@ -42,10 +42,10 @@
     border: 1px solid #dddddd;
 }
 
-.BottomTable td {
-    border: 1px solid #dddddd;
-    padding: 5px;
-}
+    .BottomTable td {
+        border: 1px solid #dddddd;
+        padding: 5px;
+    }
 
 
 

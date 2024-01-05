@@ -38,7 +38,8 @@
     <input name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования "> |
     <input name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
-    <input type="text" name="ContainerNumber" id="ContainerNumber" placeholder="Поиск по № контейнера" />
+    <button name="ButtonDownloadTable" @onclick="HtmlTableBody">Загрузить таблицу</button>
+    <input type="text" name="ContainerNumber" id="ContainerNumber" class="ContainerNumber" placeholder="Поиск по № контейнера"/>
 </div>
 
 <div class="BottomDiagram" id="BottomDiagram">
@@ -181,7 +182,7 @@
 @code{
     string schemHtml = ""; //HTML код для заполнения div BottomDiagram
     string topTableBodyHtml = "";  //HTML код для заполнения тела таблицы BottomTable
-    string positionZone = "";
+    string positionZone = "Зона 5-1-Я";
 
 
 
@@ -370,13 +371,56 @@
 
     async Task HtmlTableBody()
     {
+        topTableBodyHtml = "";  //Очистка перед отрисовкой
         try
         {
-
+            var stocksList = await StocksListJson();
+            for (int p = 0; p < stocksList.Stocks.Count; p++)//Отрисовка тела таблицы
+            {
+                for (int i = 0; i < stocksList.Stocks[p].Columns.Count; i++)
+                {
+                    for (int j = 0; j < stocksList.Stocks[p].Columns[i].CellsList.Count; j++)
+                    {
+                        if (stocksList.Stocks[p].Columns[i].CellsList[j].Name == positionZone)//Проверка для отрисовки только нужной зоны
+                        {
+                           
+                            for (int a = 0; a < stocksList.Stocks[p].Columns[i].CellsList[j].Containers.Count; a++)
+                            { 
+                                topTableBodyHtml += "<tr>";
+                                topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].ZIndex + "</td>";//Заполнение Этажа
+                                topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Name + "</td>";//Заполнение Положения
+                                if (stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].Type40Or20 == 20) //Проверка на тип контейнера
+                                {
+                                    topTableBodyHtml += "<td>22G1</td>";//Заполнение типа
+                                }
+                                else if (stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].Type40Or20 == 40)
+                                {
+                                    topTableBodyHtml += "<td>45G1</td>";//Заполнение типа
+                                }
+                                topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].Number + "</td>";//Заполнение Номера
+                                topTableBodyHtml += "<td>30480</td>";//Заполнение грузоподъемности (временное)
+                                topTableBodyHtml += "<td>2100</td>";//Заполнение тары (временное)
+                                topTableBodyHtml += "<td>ФИТ ООО</td>";//Заполнение владельца (временное)
+                                topTableBodyHtml += "<td>23.09.2023 14:29:00</td>";//Заполнение даты завоза (временное)
+                                topTableBodyHtml += "<td>ЗПУ:</td>";//Заполнение спец отметки (временное)
+                                topTableBodyHtml += "<td>Пусто</td>";//Заполнение перевозчик по разнарядке (временное)
+                                topTableBodyHtml += "<td>СТЛ-УРАЛ ООО</td>";//Заполнение экспедитор (временное)
+                                topTableBodyHtml += "<td><input type='checkbox' checked></td>";//Заполнение порож (временное)
+                                topTableBodyHtml += "<td>Поезд: , ст.: </td>";//Заполнение Заявка КТ 2.0 (временное)
+                                topTableBodyHtml += "<td>Пусто</td>";//Заполнение Направление (временное)
+                                topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].AcceptanceBidId + "</td>";//Заполнение Номер заявки
+                                topTableBodyHtml += "<td>Пусто</td>";//Заполнение Статус (временное) 
+                                topTableBodyHtml += "</tr>";
+                            }
+                           
+                        }
+                    }
+                }
+            }
         }
         catch (Exception ex)
         {
-            
+
         }
     }
 
