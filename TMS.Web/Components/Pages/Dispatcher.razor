@@ -38,7 +38,7 @@
     <input id="ButtonChangeMode" name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования " @onclick="HTmlPopupMenu"> |
     <input id="ButtonUpdateSchema" name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
-    <input type="text" id="ContainerNumber" class="ContainerNumber" placeholder="Поиск по № контейнера" @oninput="HtmlTableBody" @onchange="HtmlTableBody" />
+    <input type="text" id="ContainerNumber" class="ContainerNumber" placeholder="Поиск по № контейнера" oninput="ContainerSearch()" onchange="ContainerSearch()" />
 </div>
 
 @((MarkupString)popupMenu)
@@ -76,7 +76,12 @@
 
 
 <script>
-    
+    function ContainerSearch(){
+        let containerNumberText = document.getElementById('ContainerNumber').value;
+        const myList = document.getElementById(containerNumberText);
+        const childNodes = myList.parentNode.id;
+        document.getElementById(childNodes).style.border = "2px solid red";
+   } 
 </script>
 
 
@@ -92,18 +97,16 @@
     let containerNumberText = document.getElementById('ContainerNumber'); //Текстовое поле Поиск по № контейнера
     let activeElement = "";//Элемент который выбрали для поворота
     let degree = "0";//Градус поворота
+    var val = "";
 
     doc.addEventListener('click', function (event) { //Получение названия div при событий click
         div = ".div" + event.target.getAttribute('Class');
-        // alert(event.currentTarget.getAttribute('Class')); //Проверка работы currentTarget
-        positionZone = event.target.getAttribute('Id');
+        // alert(event.target.getAttribute('id')); //Проверка работы currentTarget
+        positionZone = event.target.getAttribute('Id');        
         containerNumberText.value = positionZone;
         elTop = doc.querySelector(div).offsetTop;
-        elLeft = doc.querySelector(div).offsetLeft;
+        elLeft = doc.querySelector(div).offsetLeft;     
     });
-
-  
-
     function moveElement(evt) {//Перемещение div клавишами WASD
         let keypress = evt.keyCode;
         if (div != null) //Проверка что div задан
@@ -303,10 +306,14 @@
                                 {
                                     for (int a=0;a<stocksList?.Stocks[p].Columns[i].CellsList.Count;a++)
                                     {
+                                        int u = 0;
                                         for (int g = 0; g < stocksList?.Stocks[p].Columns[i].CellsList[a].Containers.Count; g++)
                                         {
-                                            hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[g].Number+ "\"/>";
-                                        }
+                                            hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[u].Number+ "\"/>";
+                                            u++;
+                                        }  
+                                        break;
+
                                     }
                                     if (j < stocksList?.Stocks[p].Columns[i].CellsList.Count)//Для нормальной отрисовки столбцов разной размерности
                                     {
@@ -360,10 +367,13 @@
                         {
                             for (int a = 0; a < stocksList?.Stocks[p].Columns[i].CellsList.Count; a++)
                             {
+                                int u = 0;
                                 for (int g = 0; g < stocksList?.Stocks[p].Columns[i].CellsList[a].Containers.Count; g++)
                                 {
-                                    hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[g].Number + "\"/>";
+                                    hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[u].Number + "\"/>";
+                                    u++;
                                 }
+                                break;
                             }
                             if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
                             {
