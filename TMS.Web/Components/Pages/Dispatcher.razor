@@ -8,6 +8,7 @@
 @using Blazor.Extensions.Canvas.Canvas2D
 @using Newtonsoft.Json;
 @using Newtonsoft.Json.Converters;
+@inject IJSRuntime JsRuntime;
 
 <PageTitle>Dispatcher</PageTitle>
 
@@ -38,12 +39,13 @@
     <input id="ButtonChangeMode" name="ButtonChangeMode" type="button" value=" Вкл. режим редактирования " @onclick="HTmlPopupMenu"> |
     <input id="ButtonUpdateSchema" name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
+@*     <button onclick="HtmlTableBody()">Тест js net</button> *@
     <input type="text" id="ContainerNumber" class="ContainerNumber" placeholder="Поиск по № контейнера" oninput="ContainerSearch()" onchange="ContainerSearch()" />
 </div>
 
 @((MarkupString)popupMenu)
 
-<div class="BottomDiagram" id="BottomDiagram">
+<div class="BottomDiagram" id="BottomDiagram" @onclick="HtmlTableBody">
    @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@ 
     @((MarkupString)schemHtml)
 </div>
@@ -76,16 +78,26 @@
 
 
 <script>
+    let pastElement = "";
+
     function ContainerSearch(){
         let containerNumberText = document.getElementById('ContainerNumber').value;
-        const myList = document.getElementById(containerNumberText);
-        const childNodes = myList.parentNode.id;
-        document.getElementById(childNodes).style.border = "2px solid red";
+        let myList = document.getElementById(containerNumberText);
+        let childNodes = myList.parentNode.id;
+        document.getElementById(childNodes).style.border = "2px solid red";           
+        // if (pastElement != "")
+        // {  
+        //     alert(pastElement);    
+        //     if (pastElement != childNodes) 
+        //     {
+        //         document.getElementById(pastElement).style.border = "1 px solid white";
+        //     }
+        //      pastElement = childNodes; 
+           
+        // }
+       
    } 
 </script>
-
-
-
 
 
 <script>
@@ -97,7 +109,6 @@
     let containerNumberText = document.getElementById('ContainerNumber'); //Текстовое поле Поиск по № контейнера
     let activeElement = "";//Элемент который выбрали для поворота
     let degree = "0";//Градус поворота
-    var val = "";
 
     doc.addEventListener('click', function (event) { //Получение названия div при событий click
         div = ".div" + event.target.getAttribute('Class');
@@ -107,6 +118,12 @@
         elTop = doc.querySelector(div).offsetTop;
         elLeft = doc.querySelector(div).offsetLeft;     
     });
+
+    function positionZoneNet() {
+        return positionZone;
+    }
+
+
     function moveElement(evt) {//Перемещение div клавишами WASD
         let keypress = evt.keyCode;
         if (div != null) //Проверка что div задан
@@ -193,7 +210,6 @@
     string idZone = "";
     string popupMenu = "";
     string hiddenNumbers = "";
-
 
     // private Canvas2DContext _context;
 
@@ -293,7 +309,7 @@
                     }
                     schemHtml += "</tr>";
 
-
+                    hiddenNumbers = "";
                     for (int j = 0; j < stocksList?.Stocks[p].Rows.Count; j++)
                     {
                         if (stocksList?.Stocks[p].Rows[j].Visibility == 1)
@@ -306,14 +322,11 @@
                                 {
                                     for (int a=0;a<stocksList?.Stocks[p].Columns[i].CellsList.Count;a++)
                                     {
-                                        int u = 0;
                                         for (int g = 0; g < stocksList?.Stocks[p].Columns[i].CellsList[a].Containers.Count; g++)
                                         {
-                                            hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[u].Number+ "\"/>";
-                                            u++;
-                                        }  
+                                            hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[g].Number+ "\"/>";                                            
+                                        }
                                         break;
-
                                     }
                                     if (j < stocksList?.Stocks[p].Columns[i].CellsList.Count)//Для нормальной отрисовки столбцов разной размерности
                                     {
@@ -358,7 +371,7 @@
                     schemHtml += "</thead>";
                     schemHtml += "<tbody>";
 
-
+                    hiddenNumbers = "";
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                     {
                         schemHtml += "<tr>";
@@ -367,11 +380,9 @@
                         {
                             for (int a = 0; a < stocksList?.Stocks[p].Columns[i].CellsList.Count; a++)
                             {
-                                int u = 0;
                                 for (int g = 0; g < stocksList?.Stocks[p].Columns[i].CellsList[a].Containers.Count; g++)
                                 {
-                                    hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[u].Number + "\"/>";
-                                    u++;
+                                    hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[g].Number + "\"/>";  
                                 }
                                 break;
                             }
@@ -411,68 +422,9 @@
 
     }
 
-    async Task HtmlTableBody(ChangeEventArgs e)
+    async Task HtmlTableBody()
     {
-        containerNumber = e.Value.ToString();
-        topTableBodyHtml = "";  //Очистка перед отрисовкой
-        try
-        {
-            var stocksList = await StocksListJson();
-            topTableBodyHtml += "<style type=\"text/css\">"
-            + ".BottomTable TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
-            + "</style>";
-            for (int p = 0; p < stocksList.Stocks.Count; p++)//Отрисовка тела таблицы
-            {
-                for (int i = 0; i < stocksList.Stocks[p].Columns.Count; i++)
-                {
-                    for (int j = 0; j < stocksList.Stocks[p].Columns[i].CellsList.Count; j++)
-                    {
-
-                        for (int a = 0; a < stocksList.Stocks[p].Columns[i].CellsList[j].Containers.Count; a++)
-                        {
-
-                            if (stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].Number.Contains(containerNumber))//Проверка для отрисовки только необходимого контейнера
-                            {
-                                topTableBodyHtml += "<tr>";
-                                topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].ZIndex + "</td>";//Заполнение Этажа
-                                topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Name + "</td>";//Заполнение Положения
-                                if (stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].Type40Or20 == 20) //Проверка на тип контейнера
-                                {
-                                    topTableBodyHtml += "<td>22G1</td>";//Заполнение типа
-                                }
-                                else if (stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].Type40Or20 == 40)
-                                {
-                                    topTableBodyHtml += "<td>45G1</td>";//Заполнение типа
-                                }
-                                topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].Number + "</td>";//Заполнение Номера
-                                topTableBodyHtml += "<td>30480</td>";//Заполнение грузоподъемности (временное)
-                                topTableBodyHtml += "<td>2100</td>";//Заполнение тары (временное)
-                                topTableBodyHtml += "<td>ФИТ ООО</td>";//Заполнение владельца (временное)
-                                topTableBodyHtml += "<td>23.09.2023 14:29:00</td>";//Заполнение даты завоза (временное)
-                                topTableBodyHtml += "<td>ЗПУ:</td>";//Заполнение спец отметки (временное)
-                                topTableBodyHtml += "<td>Пусто</td>";//Заполнение перевозчик по разнарядке (временное)
-                                topTableBodyHtml += "<td>СТЛ-УРАЛ ООО</td>";//Заполнение экспедитор (временное)
-                                topTableBodyHtml += "<td><input type='checkbox' checked></td>";//Заполнение порож (временное)
-                                topTableBodyHtml += "<td>Поезд: , ст.: </td>";//Заполнение Заявка КТ 2.0 (временное)
-                                topTableBodyHtml += "<td>Пусто</td>";//Заполнение Направление (временное)
-                                topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].AcceptanceBidId + "</td>";//Заполнение Номер заявки
-                                topTableBodyHtml += "<td>Пусто</td>";//Заполнение Статус (временное)
-                                topTableBodyHtml += "</tr>";
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-
-        }
-    }
-
-    async Task HtmlTableBodyClick(ChangeEventArgs e)
-    {
-        idZone = "Зона 5-19-Я";
+        idZone = await JsRuntime.InvokeAsync<string>("positionZoneNet"); //Получение idZone из функции js
         topTableBodyHtml = "";  //Очистка перед отрисовкой
         try
         {
