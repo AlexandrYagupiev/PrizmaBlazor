@@ -40,7 +40,7 @@
     <input id="ButtonUpdateSchema" name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
 @*     <button onclick="HtmlTableBody()">Тест js net</button> *@
-    <input type="text" id="ContainerNumber" class="ContainerNumber" placeholder="Поиск по № контейнера" oninput="ContainerSearch()" onchange="ContainerSearch()" />
+    <input type="text" id="ContainerNumber" class="ContainerNumber" placeholder="Поиск по № контейнера" @oninput='ContainerSearch' @onchange="ContainerSearch" />
 </div>
 
 @((MarkupString)popupMenu)
@@ -77,27 +77,6 @@
     </table>
 
 
-<script>
-    let pastElement = "";
-
-    function ContainerSearch(){
-        let containerNumberText = document.getElementById('ContainerNumber').value;
-        let myList = document.getElementById(containerNumberText);
-        let childNodes = myList.parentNode.id;
-        document.getElementById(childNodes).style.border = "2px solid red";           
-        // if (pastElement != "")
-        // {  
-        //     alert(pastElement);    
-        //     if (pastElement != childNodes) 
-        //     {
-        //         document.getElementById(pastElement).style.border = "1 px solid white";
-        //     }
-        //      pastElement = childNodes; 
-           
-        // }
-       
-   } 
-</script>
 
 
 <script>
@@ -106,21 +85,35 @@
     let positionZone = "";//Позиция ячейки в таблице
     let elTop = 0;//Координата Y для div
     let elLeft = 0;//Координата X для div
-    let containerNumberText = document.getElementById('ContainerNumber'); //Текстовое поле Поиск по № контейнера
     let activeElement = "";//Элемент который выбрали для поворота
     let degree = "0";//Градус поворота
+    let containerNumberText = "";
 
     doc.addEventListener('click', function (event) { //Получение названия div при событий click
         div = ".div" + event.target.getAttribute('Class');
         // alert(event.target.getAttribute('id')); //Проверка работы currentTarget
         positionZone = event.target.getAttribute('Id');        
-        containerNumberText.value = positionZone;
         elTop = doc.querySelector(div).offsetTop;
         elLeft = doc.querySelector(div).offsetLeft;     
     });
 
     function positionZoneNet() {
         return positionZone;
+    }
+
+    function containerNumberValue() {
+        containerNumberText = document.getElementById('ContainerNumber').value;
+        return containerNumberText;
+    }
+
+    function changeStrokeColor(divName) 
+    {
+        // document.getElementById("BottomDiagram").scrollTo(100,100);
+        document.getElementById(divName).style.border = "2px solid red";
+    }
+
+    function cleaningStrokeColor(divName) {
+        document.getElementById(divName).style.border = "1px solid white";
     }
 
 
@@ -162,7 +155,14 @@
     document.addEventListener("keydown", moveElement);
 </script>
 
-
+@* <script>
+    window.containerSearch = () => {
+        DotNet.invokeMethodAsync('TMS.Web', 'ContainerSearch')
+            .then(data => {
+                console.log(data);
+            });
+    };
+</script> *@
 
 
 
@@ -209,48 +209,9 @@
     string containerNumber = "";
     string idZone = "";
     string popupMenu = "";
-    string hiddenNumbers = "";
-
-    // private Canvas2DContext _context;
-
-    // protected BECanvasComponent _canvasReference;
-
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     try
-    //     {
-    //         this._context = await this._canvasReference.CreateCanvas2DAsync();
-    //         var strResponse = await SendingRequestDiagram();
-    //         TMS.Domain.Models.Root? root = JsonSerializer.Deserialize<TMS.Domain.Models.Root>(strResponse);
-
-    //         var LinstRowName = root.rows.Select(a => a.rowName).ToList();
-
-    //         for (int i = 0; i < LinstRowName.Count; i++)
-    //         {
-    //             await this._context.StrokeTextAsync(LinstRowName[i], Convert.ToDouble(root.positionX + 5), Convert.ToDouble(root.positionY + 50)+i*30); //Отрисовка имени ряда
-    //         }    
-    //         await this._context.SetFontAsync("14px Arial"); //Стиль отрисовки текста
-    //         await this._context.StrokeTextAsync(root?.name, Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY+12));  //Отрисовка имени зоны
-    //         /* await this._context.StrokeRectAsync(10, 30, 400, 100); */ //Отрисовка области зоны
-    //         for (int i = 1; i <= root?.columns.Count; i++)
-    //         {
-    //             await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20) * i, Convert.ToDouble(root.positionY + 30), 20, Convert.ToDouble(root?.rows.Count*30));//Отрисовка колонок
-    //         }
-    //         for (int j = 1; j <= root?.rows.Count; j++)
-    //         {
-    //             await this._context.StrokeRectAsync(Convert.ToDouble(root.positionX + 20), Convert.ToDouble(root.positionY + 30) * j, Convert.ToDouble(root?.columns.Count * 20), 30);//Отрисовка столбцов
-    //         }
-
-
-
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         await DispatchExceptionAsync(ex);
-    //     }
-
-
-    // }
+    string nameIdZone = "";
+    string oldnameIdZone = "";
+  
     async Task HtmlShems()
     {
         schemHtml = ""; //Очистка перед отрисовкой
@@ -309,7 +270,6 @@
                     }
                     schemHtml += "</tr>";
 
-                    hiddenNumbers = "";
                     for (int j = 0; j < stocksList?.Stocks[p].Rows.Count; j++)
                     {
                         if (stocksList?.Stocks[p].Rows[j].Visibility == 1)
@@ -319,19 +279,10 @@
                             for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                             {
                                 if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
-                                {
-                                    for (int a=0;a<stocksList?.Stocks[p].Columns[i].CellsList.Count;a++)
-                                    {
-                                        for (int g = 0; g < stocksList?.Stocks[p].Columns[i].CellsList[a].Containers.Count; g++)
-                                        {
-                                            hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[g].Number+ "\"/>";                                            
-                                        }
-                                        break;
-                                    }
+                                {                                   
                                     if (j < stocksList?.Stocks[p].Columns[i].CellsList.Count)//Для нормальной отрисовки столбцов разной размерности
                                     {
-                                        schemHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\" class=\"Table" + stocksList.Stocks[p].Id + "\" id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + " " + hiddenNumbers + "</div></td>"; //Содержимое таблицы
-                                        hiddenNumbers = "";
+                                        schemHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\" class=\"Table" + stocksList.Stocks[p].Id + "\" id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
                                     }
                                     else
                                     {
@@ -371,25 +322,16 @@
                     schemHtml += "</thead>";
                     schemHtml += "<tbody>";
 
-                    hiddenNumbers = "";
+
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                     {
                         schemHtml += "<tr>";
                         schemHtml += "<th height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\">" + stocksList?.Stocks[p].Columns[i].DisplayName + "</div></th>"; //Вывод название строки (лево)
                         for (int j = 0; j < stocksList?.Stocks[p].Rows.Count; j++)
-                        {
-                            for (int a = 0; a < stocksList?.Stocks[p].Columns[i].CellsList.Count; a++)
-                            {
-                                for (int g = 0; g < stocksList?.Stocks[p].Columns[i].CellsList[a].Containers.Count; g++)
-                                {
-                                    hiddenNumbers += "<input type = \"hidden\" id =\"" + stocksList?.Stocks[p].Columns[i].CellsList[a].Containers[g].Number + "\"/>";  
-                                }
-                                break;
-                            }
+                        {                           
                             if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
                             {
-                                schemHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\"class=\"Table" + stocksList.Stocks[p].Id + "\"id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + " " + hiddenNumbers + "</div></td>"; //Содержимое таблицы
-                                hiddenNumbers = "";
+                                schemHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\"class=\"Table" + stocksList.Stocks[p].Id + "\"id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
                             }
                             else
                             {
@@ -411,6 +353,7 @@
             schemHtml = ex.ToString();
         }
     }
+
 
     async Task HTmlPopupMenu()
     {
@@ -482,8 +425,48 @@
         }
     }
 
+    async Task ContainerSearch()//Поиск контейнера
+    {
+        containerNumber = await JsRuntime.InvokeAsync<string>("containerNumberValue"); //Получение номера контейнера из функции js;
+        try
+        {
+            if (containerNumber?.Length > 5)//Проверка что в поле ContainerNumber больше 5 символов
+            {
+                var stocksList = await StocksListJson();
+                for (int p = 0; p < stocksList.Stocks.Count; p++)
+                {
+                    for (int i = 0; i < stocksList.Stocks[p].Columns.Count; i++)
+                    {
+                        for (int j = 0; j < stocksList.Stocks[p].Columns[i].CellsList.Count; j++)
+                        {
+                            for (int a = 0; a < stocksList.Stocks[p].Columns[i].CellsList[j].Containers.Count; a++)
+                            {
+                                if (stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].Number.Contains(containerNumber))
+                                {
+                                    nameIdZone = stocksList.Stocks[p].Columns[i].CellsList[j].Name; 
+                                    await JsRuntime.InvokeVoidAsync("changeStrokeColor", nameIdZone);//Обводка ячейки с необходимым контейнером
+                                    if (oldnameIdZone != "")
+                                    {
+                                        if (oldnameIdZone != nameIdZone)
+                                        {
+                                            await JsRuntime.InvokeVoidAsync("cleaningStrokeColor", oldnameIdZone);//Очистка прошлой ячейки от обводки
+                                        }
+                                    }
+                                    oldnameIdZone = nameIdZone;
+                                }                              
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {                     
+            ex.ToString();
+        }
+    }
 
-
+  
     async Task<TMS.Domain.Models.StocksList> StocksListJson()
     {
         var textResponse = await HttpClient();
