@@ -9,6 +9,37 @@
     background: #E0FFFF;
 }
 
+.EditMenu {
+    visibility: hidden;
+    width: 500px;
+    height: 100%;
+    background-color: #C0C0C0;
+    position: fixed;
+    top: 28%;
+    right: 1.2%;
+    overflow-y:scroll;
+}
+
+
+.round {
+    width: 20px;
+    height: 20px; /* Размеры кнопки */
+    border-radius: 50%; /* Радиус скругления */
+    /*border: none;*/ /* Убираем рамку вокруг кнопки */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+  /*  .round:active {
+        border: 1px solid #87CEFA;
+    }
+
+    .round:hover {
+        border: 1px solid #87CEFA;
+    }
+*/
+
 
 .BottomDiagram {
     position: relative;
