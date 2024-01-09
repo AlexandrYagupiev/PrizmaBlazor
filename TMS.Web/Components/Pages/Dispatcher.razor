@@ -78,7 +78,6 @@
 
 
 
-
 <script>
     let doc = document.querySelector('.BottomDiagram'); //зона для работы click
     let div = ""; //Div в котором производим манипуляции
@@ -108,7 +107,8 @@
 
     function changeStrokeColor(divName) 
     {
-        // document.getElementById("BottomDiagram").scrollTo(100,100);
+        document.getElementById(divName).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+        // document.getElementById("BottomDiagram").scrollIntoView(document.getElementById(divName).parentNode);
         document.getElementById(divName).style.border = "2px solid red";
     }
 
@@ -373,6 +373,7 @@
         {
             var stocksList = await StocksListJson();
             topTableBodyHtml += "<style type=\"text/css\">"
+            + ".BottomTable {border-collapse: collapse;min-height:100px;max-height: 150px;display: inline-block;}"
             + ".BottomTable TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
             + "</style>";
             for (int p = 0; p < stocksList.Stocks.Count; p++)//Отрисовка тела таблицы
