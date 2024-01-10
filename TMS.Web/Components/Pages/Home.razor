@@ -5,15 +5,26 @@
 
 <PageTitle>Домашняя страница</PageTitle>
 
-<button @onclick="Submit">Click</button>
-
-Добро пожаловать в новое приложение.
+<div class="video_2">
+	<div class="video_2-row">
+		<div class="video_2-col">
+			<div class="video_2-wrp">
+				<iframe src="https://www.youtube.com/embed/MwtwdQzk3hE?si=GWEKMFNnZ9eZuH4C"></iframe>
+			</div>
+		</div>
+		<div class="video_2-col">
+			<div class="video_2-wrp">
+				<iframe src="https://www.youtube.com/embed/9zBR4bsfkhQ?si=PjoP5fGgsTBApvH_"></iframe>
+			</div>
+		</div>
+	</div>
+</div>
 
 @code {
-    async Task Submit()
-    {
-        HttpClient httpClient = ClientFactory.CreateClient();
-        var response = await httpClient.GetAsync("https://tapi2.cit-ekb.ru/Api/Scheme/GetStock ");
-        var time = await response.Content.ReadAsStringAsync();
-    }
+    // async Task Submit()
+    // {
+    //     HttpClient httpClient = ClientFactory.CreateClient();
+    //     var response = await httpClient.GetAsync("https://tapi2.cit-ekb.ru/Api/Scheme/GetStock ");
+    //     var time = await response.Content.ReadAsStringAsync();
+    // }
 }

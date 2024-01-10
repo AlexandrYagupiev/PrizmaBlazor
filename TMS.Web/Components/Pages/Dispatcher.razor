@@ -12,7 +12,7 @@
 
 <PageTitle>Dispatcher</PageTitle>
 
-<div class="TopTables">
+@* <div class="TopTables">
     <div class="TableGroupNameAcceptContainer">
        <strong>ПРИНЯТЬ КОНТЕЙНЕР НА ТЕРМИНАЛ</strong>
    </div>
@@ -25,7 +25,7 @@
     <div class="TableGroupNameMovementTerminal">
         <strong>ТЕРМИНАЛ ПЕРЕМЕЩЕНИЯ</strong>
     </div>
-</div>
+</div> *@
 
 
 <div class="TopLine">
@@ -39,14 +39,10 @@
     <input id="ButtonChangeMode" name="ButtonChangeMode" type="button" value="Вкл. режим редактирования" onclick="EditMenuShow()"> |
     <input id="ButtonUpdateSchema" name="ButtonUpdateSchema" type="button" value=" Обновить схему "> |
     <button name="ButtonDownloadDiagram" @onclick="HtmlShems">Загрузить схему</button>
-@*     <button onclick="HtmlTableBody()">Тест js net</button> *@
     <input type="text" id="ContainerNumber" class="ContainerNumber" placeholder="Поиск по № контейнера" @oninput='ContainerSearch' @onchange="ContainerSearch" />
 </div>
 
-@((MarkupString)popupMenu)
-
 <div class="BottomDiagram" id="BottomDiagram" @onclick="HtmlTableBody">
-   @*  <BECanvas Width="500" Height="500" @ref="_canvasReference"></BECanvas> *@ 
     @((MarkupString)schemHtml)
 </div>
 
@@ -78,27 +74,182 @@
 
 
 <div class="EditMenu" id="EditMenu">
-    <div><button class="round" onclick="">⮟</button>Ячейка</div>
-    <div><button class="round" onclick="">⮟</button>Сток</div>
-    <div><button class="round" onclick="">⮟</button>Ряд стока(зоны)</div>
-    <div><button class="round" onclick="">⮟</button>Линия стока (зоны)</div>
-    <div><button class="round" onclick="">⮟</button>Графический объект</div>
-    <div><button class="round" onclick="">⮟</button>Справочник</div>
-    <div><input type="button" value="Добавить схему"> <input type="button" value="Заполнить схему из старой схемы"></div>
-    <div><input type="button" value="Очистить схему"></div>
-    <div><input type="button" value="Добавить графический объект"> <input type="button" value="Добавить сток"></div>
-    <div><input type="button" value="Сохранить"></div>
+
+    <details>
+        <summary>Ячейка</summary>
+        Максимальная высота: <input type="text" class="TextBoxEditMenu" />
+    </details>@*Виджет раскрытия Ячейка *@
+
+    <details>
+        <summary>Сток</summary>
+
+        <label>Имя стока(зона):</label> <input type="text" class="TextBoxEditMenu" id="EditMenuSinkNameZone" /><br />
+        <label>Сокращенное имя зоны:</label> <input type="text" class="TextBoxEditMenu" /><br />
+        <label>Позиция по X:</label> <input type="text" class="TextBoxEditMenu" /><br />
+        <label>Позиция по Y:</label> <input type="text" class="TextBoxEditMenu" /><br />
+        <label>Размер по X:</label> <input type="text" class="TextBoxEditMenu" /><br />
+        <label>Размер по Y:</label> <input type="text" class="TextBoxEditMenu" /><br />
+        <label>Поворот:</label> <input type="text" class="TextBoxEditMenu" /><br />
+
+        <label>Ориентация:</label><select>
+            <option value="Vertical">Вертикально</option>
+            <option value="Horizontally">Горизонтально</option>
+        </select><br />
+
+        <label>Площадка №:</label><select>
+            <option value="Test">Test</option>
+            <option value="Test">Test</option>
+        </select><br />
+
+        <label>Тип стока:</label><select>
+            <option value="Test">Test</option>
+            <option value="Test">Test</option>
+        </select><br />
+
+        <input type="checkbox" /><label> Видимость</label><br />
+        <input type="checkbox" /><label> Доступ сверху</label><br />
+        <input type="checkbox" /><label> Только порожние</label><br />
+
+        <input type="checkbox" /><label> Таможня</label><br />
+        <input type="checkbox" /><label> Доступ снизу</label><br />
+        <input type="checkbox" /><label> Обратная нумерация рядов</label><br />
+        <input type="checkbox" /><label> Обратная нумерация колонок</label><br />
+
+        <label>Отобразить имена: </label> <input type="checkbox" /><label>Слева</label>  <input type="checkbox" /><label>Справа</label><br />
+
+        <label>Окрашивание рядов:</label> <input type="text" class="TextBoxEditMenu" /><br />
+
+    </details> @*Виджет раскрытия Сток *@
+
+    <details>
+        <summary>Ряд стока(зоны)</summary>
+
+        <table class="EditMenuTableDrainRangeZones" id="EditMenuTableDrainRangeZones">
+            <tr>
+                <td>Test1</td>
+            </tr>
+            <tr>
+                <td>Test2</td>
+            </tr>
+            <tr>
+                <td>Test3</td>
+            </tr>
+            <tr>
+                <td>Test4</td>
+            </tr>
+            <tr>
+                <td>Test5</td>
+            </tr>
+            <tr>
+                <td>Test6</td>
+            </tr>
+        </table><br />
+
+        <label>Номер столбца: </label><input type="text" class="TextBoxEditMenu"/><br />
+        <label>Размер столбца по типу кт: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Имя столбца: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Строка начала: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Строка конец: </label><input type="text" class="TextBoxEditMenu" /><br />
+
+        <label>Тип стока:</label><select>
+            <option value="Test">Test</option>
+            <option value="Test">Test</option>
+            <option value="Test">Test</option>
+            <option value="Test">Test</option>
+        </select>
+
+    </details>@*Виджет раскрытия Ряд стока(зоны) *@
+
+    <details>
+        <summary>Линия стока (зоны)</summary>
+
+        <table class="EditMenuTableDrainLineZones" id="EditMenuTableDrainLineZones">
+            <tr>
+                <td>TestA</td>
+            </tr>
+            <tr>
+                <td>TestB</td>
+            </tr>
+            <tr>
+                <td>TestC</td>
+            </tr>
+            <tr>
+                <td>TestD</td>
+            </tr>
+            <tr>
+                <td>TestE</td>
+            </tr>
+            <tr>
+                <td>TestF</td>
+            </tr>
+        </table><br />
+
+        <label>Номер строки: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Имя строки: </label><input type="text" class="TextBoxEditMenu" /><br />
+
+        <input type="checkbox" /> <label>Видимость</label><br />
+
+    </details>@*Виджет раскрытия Линия стока (зоны) *@
+
+    <details>
+        <summary>Графический объект</summary>
+
+        <table class="EditMenuTableGraphicObject" id="EditMenuTableGraphicObject">
+            <tr>
+                <td>Object1</td>
+            </tr>
+            <tr>
+                <td>Object2</td>
+            </tr>
+            <tr>
+                <td>Object3</td>
+            </tr>
+            <tr>
+                <td>Object4</td>
+            </tr>
+            <tr>
+                <td>Object5</td>
+            </tr>
+            <tr>
+                <td>Object6</td>
+            </tr>
+        </table><br />
+
+        <label>Ширина: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Высота: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>X: </label><input type="text" class="TextBoxEditMenu" />  <label>Y: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Толщина линии:  </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Текст: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Высота текста: </label><input type="text" class="TextBoxEditMenu" />  <label>Длина текста:  </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Размер шрифта: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <input type="checkbox" /><label> Горизонтальный</label><br />
+        <label>Текст X: </label><input type="text" class="TextBoxEditMenu" />  <label>Текст Y: </label><input type="text" class="TextBoxEditMenu" /><br />
+
+    </details>@*Виджет раскрытия Графический объект*@
+
+    <details>
+        <summary>Справочник</summary>
+
+        <label>X: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Y: </label><input type="text" class="TextBoxEditMenu" /><br />
+    </details>@*Виджет раскрытия Справочник*@
+
+    <input type="button" value="Добавить схему"> <input type="button" value="Заполнить схему из старой схемы"><br />
+    <input type="button" value="Очистить схему"><br />
+    <input type="button" value="Добавить графический объект"> <input type="button" value="Добавить сток"><br />
+    <input type="button" value="Сохранить"><br />
 </div>
 
 
 <script>
-    let selector = 0;
+    let selector = 0;//Отображение EditMenu
 
     function EditMenuShow() {
-        let doc = document.getElementById('EditMenu');
+        let doc = document.getElementById('EditMenu');//Для скрытия и показа EditMenu
         if (selector == 0) {
-            doc.style.visibility = "visible";          
+            doc.style.visibility = "visible"; 
             selector = 1;
+
         }
         else if (selector == 1) 
         {
@@ -117,14 +268,19 @@
     let elLeft = 0;//Координата X для div
     let activeElement = "";//Элемент который выбрали для поворота
     let degree = "0";//Градус поворота
-    let containerNumberText = "";
+    let containerNumberText = "";//Номер контейнера
+    const EditMenuSinkNameZone = document.getElementById("EditMenuSinkNameZone");//Текстовое поле 
+
 
     doc.addEventListener('click', function (event) { //Получение названия div при событий click
         div = ".div" + event.target.getAttribute('Class');
         // alert(event.target.getAttribute('id')); //Проверка работы currentTarget
         positionZone = event.target.getAttribute('Id');        
         elTop = doc.querySelector(div).offsetTop;
-        elLeft = doc.querySelector(div).offsetLeft;     
+        elLeft = doc.querySelector(div).offsetLeft;
+        if (selector == 1) {
+            EditMenuSinkNameZone.value = event.target.getAttribute('Class');
+        }
     });
 
     function positionZoneNet() {
@@ -148,37 +304,36 @@
 
 
     function moveElement(evt) {//Перемещение div клавишами WASD
-        let keypress = evt.keyCode;
-        if (div != null) //Проверка что div задан
-        {
-            if (keypress == 87) { //Передвижение div вверх клавишей W
-                doc.querySelector(div).style.top = (elTop = elTop - 5) + 'px';
-            }
-            if (keypress == 83) { //Передвижение div вниз клавишей S
-                doc.querySelector(div).style.top = (elTop = elTop + 5) + 'px';
-            }
-            if (keypress == 65) { //Передвижение div влево клавишей A
-                doc.querySelector(div).style.left = (elLeft = elLeft - 5) + 'px';
-            }
-            if (keypress == 68) { //Передвижение div вправо клавишей D
-                doc.querySelector(div).style.left = (elLeft = elLeft + 5) + 'px';
-            }
-            if (keypress == 81) { //Поворот div влево клавишей Q
-                degree -= 5;
-                if (degree != null) {
-                    doc.querySelector(div).style.transform
-                        = "rotate(" + degree + "deg)";
+        if (selector == 1) { //Проверка активно или нет меню редактирования
+            let keypress = evt.keyCode;
+            if (div != null) //Проверка что div задан
+            {
+                if (keypress == 87) { //Передвижение div вверх клавишей W
+                    doc.querySelector(div).style.top = (elTop = elTop - 5) + 'px';
                 }
-            }
-            if (keypress == 69) { //Поворот div вправо клавишей E
-                degree += 5;
-                if (degree != null) {
-                    doc.querySelector(div).style.transform
-                        = "rotate(" + degree + "deg)";
+                if (keypress == 83) { //Передвижение div вниз клавишей S
+                    doc.querySelector(div).style.top = (elTop = elTop + 5) + 'px';
                 }
-            }
-            if (keypress == 13) {
-                
+                if (keypress == 65) { //Передвижение div влево клавишей A
+                    doc.querySelector(div).style.left = (elLeft = elLeft - 5) + 'px';
+                }
+                if (keypress == 68) { //Передвижение div вправо клавишей D
+                    doc.querySelector(div).style.left = (elLeft = elLeft + 5) + 'px';
+                }
+                if (keypress == 81) { //Поворот div влево клавишей Q
+                    degree -= 5;
+                    if (degree != null) {
+                        doc.querySelector(div).style.transform
+                            = "rotate(" + degree + "deg)";
+                    }
+                }
+                if (keypress == 69) { //Поворот div вправо клавишей E
+                    degree += 5;
+                    if (degree != null) {
+                        doc.querySelector(div).style.transform
+                            = "rotate(" + degree + "deg)";
+                    }
+                }
             }
         }
     }
@@ -193,9 +348,6 @@
             });
     };
 </script> *@
-
-
-
 
 <script>//Cкролл BottomDiagram при зажатий левой кнопки мыши    
     (function () {
@@ -238,10 +390,9 @@
     string topTableBodyHtml = "";  //HTML код для заполнения тела таблицы BottomTable
     string containerNumber = "";
     string idZone = "";
-    string popupMenu = "";
     string nameIdZone = "";
     string oldnameIdZone = "";
-  
+
     async Task HtmlShems()
     {
         schemHtml = ""; //Очистка перед отрисовкой
@@ -441,7 +592,7 @@
         }
         catch (Exception ex)
         {
-
+            topTableBodyHtml = ex.ToString();
         }
     }
 

@@ -7,10 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Components\Pages\Controller.razor.css" />
+    <None Remove="Components\Pages\Home.razor.css" />
     <None Remove="Components\Pages\TimeReport.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Components\Pages\Controller.razor.css" />
+    <Content Include="Components\Pages\Home.razor.css" />
     <Content Include="Components\Pages\TimeReport.razor.css" />
   </ItemGroup>
 
