@@ -12,7 +12,7 @@
 
 <PageTitle>Dispatcher</PageTitle>
 
-@* <div class="TopTables">
+<div class="TopTables">
     <div class="TableGroupNameAcceptContainer">
        <strong>ПРИНЯТЬ КОНТЕЙНЕР НА ТЕРМИНАЛ</strong>
    </div>
@@ -25,7 +25,7 @@
     <div class="TableGroupNameMovementTerminal">
         <strong>ТЕРМИНАЛ ПЕРЕМЕЩЕНИЯ</strong>
     </div>
-</div> *@
+</div>
 
 
 <div class="TopLine">
@@ -77,54 +77,54 @@
 
     <details>
         <summary>Ячейка</summary>
-        Максимальная высота: <input type="text" class="TextBoxEditMenu" />
+        Максимальная высота: <input type="text" class="TextBoxEditMenu" id="EditMenuCellMaximumHeight" />
     </details>@*Виджет раскрытия Ячейка *@
 
     <details>
         <summary>Сток</summary>
 
         <label>Имя стока(зона):</label> <input type="text" class="TextBoxEditMenu" id="EditMenuSinkNameZone" /><br />
-        <label>Сокращенное имя зоны:</label> <input type="text" class="TextBoxEditMenu" /><br />
-        <label>Позиция по X:</label> <input type="text" class="TextBoxEditMenu" /><br />
-        <label>Позиция по Y:</label> <input type="text" class="TextBoxEditMenu" /><br />
-        <label>Размер по X:</label> <input type="text" class="TextBoxEditMenu" /><br />
-        <label>Размер по Y:</label> <input type="text" class="TextBoxEditMenu" /><br />
-        <label>Поворот:</label> <input type="text" class="TextBoxEditMenu" /><br />
+        <label>Сокращенное имя зоны:</label> <input type="text" class="TextBoxEditMenu" id="EditMenuSinkShortNameZone" /><br />
+        <label>Позиция по X:</label> <input type="text" class="TextBoxEditMenu" id="EditMenuSinkXPosition" /><br />
+        <label>Позиция по Y:</label> <input type="text" class="TextBoxEditMenu" id="EditMenuSinkYPosition" /><br />
+        <label>Размер по X:</label> <input type="text" class="TextBoxEditMenu" id="EditMenuSinkSizeX" /><br />
+        <label>Размер по Y:</label> <input type="text" class="TextBoxEditMenu" id="EditMenuSinkSizeY" /><br />
+        <label>Поворот:</label> <input type="text" class="TextBoxEditMenu" id="EditMenuSinkRotation" /><br />
 
-        <label>Ориентация:</label><select>
+        <label>Ориентация:</label><select id="EditMenuSinkOrientation">
             <option value="Vertical">Вертикально</option>
             <option value="Horizontally">Горизонтально</option>
         </select><br />
 
-        <label>Площадка №:</label><select>
+        <label>Площадка №:</label><select id="EditMenuSinkSiteNumber">
             <option value="Test">Test</option>
             <option value="Test">Test</option>
         </select><br />
 
-        <label>Тип стока:</label><select>
+        <label>Тип стока:</label><select id="EditMenuSinkDrainType">
             <option value="Test">Test</option>
             <option value="Test">Test</option>
         </select><br />
 
-        <input type="checkbox" /><label> Видимость</label><br />
-        <input type="checkbox" /><label> Доступ сверху</label><br />
-        <input type="checkbox" /><label> Только порожние</label><br />
+        <input type="checkbox" id="EditMenuSinkVisibility" /><label> Видимость</label><br />
+        <input type="checkbox" id="EditMenuSinkAccessFromAbove" /><label> Доступ сверху</label><br />
+        <input type="checkbox" id="EditMenuSinkEmptyOnly" /><label> Только порожние</label><br />
 
-        <input type="checkbox" /><label> Таможня</label><br />
-        <input type="checkbox" /><label> Доступ снизу</label><br />
-        <input type="checkbox" /><label> Обратная нумерация рядов</label><br />
-        <input type="checkbox" /><label> Обратная нумерация колонок</label><br />
+        <input type="checkbox" id="EditMenuSinkCustoms" /><label> Таможня</label><br />
+        <input type="checkbox" id="EditMenuSinkAccessFromBelow" /><label> Доступ снизу</label><br />
+        <input type="checkbox" id="EditMenuSinkReverseNumberingRows" /><label> Обратная нумерация рядов</label><br />
+        <input type="checkbox" id="EditMenuSinkReverseNumberingColumn" /><label> Обратная нумерация колонок</label><br />
 
-        <label>Отобразить имена: </label> <input type="checkbox" /><label>Слева</label>  <input type="checkbox" /><label>Справа</label><br />
+        <label>Отобразить имена: </label> <input type="checkbox" id="EditMenuSinkShowNamesLeft" /><label>Слева</label>  <input type="checkbox" id="EditMenuSinkShowNamesRight" /><label>Справа</label><br />
 
-        <label>Окрашивание рядов:</label> <input type="text" class="TextBoxEditMenu" /><br />
+        <label>Окрашивание рядов:</label> <input type="text" class="TextBoxEditMenuColoringRows" /><br />
 
     </details> @*Виджет раскрытия Сток *@
 
     <details>
         <summary>Ряд стока(зоны)</summary>
 
-        <table class="EditMenuTableDrainRangeZones" id="EditMenuTableDrainRangeZones">
+        <table class="EditMenuZoneDrainRangeTableDrainRangeZones" id="EditMenuZoneDrainRangeTableDrainRangeZones">
             <tr>
                 <td>Test1</td>
             </tr>
@@ -145,13 +145,13 @@
             </tr>
         </table><br />
 
-        <label>Номер столбца: </label><input type="text" class="TextBoxEditMenu"/><br />
-        <label>Размер столбца по типу кт: </label><input type="text" class="TextBoxEditMenu" /><br />
-        <label>Имя столбца: </label><input type="text" class="TextBoxEditMenu" /><br />
-        <label>Строка начала: </label><input type="text" class="TextBoxEditMenu" /><br />
-        <label>Строка конец: </label><input type="text" class="TextBoxEditMenu" /><br />
+        <label>Номер столбца: </label><input type="text" class="TextBoxEditMenu" id="EditMenuZoneDrainRangeColumnNumber" /><br />
+        <label>Размер столбца по типу кт: </label><input type="text" class="TextBoxEditMenu" id="EditMenuZoneDrainRangeColumnSizeCtType" /><br />
+        <label>Имя столбца: </label><input type="text" class="TextBoxEditMenu" id="EditMenuZoneDrainRangeColumnName" /><br />
+        <label>Строка начала: </label><input type="text" class="TextBoxEditMenu" id="EditMenuZoneDrainRangeStartLine" /><br />
+        <label>Строка конец: </label><input type="text" class="TextBoxEditMenu" id="EditMenuZoneDrainRangeEndLine" /><br />
 
-        <label>Тип стока:</label><select>
+        <label>Тип стока:</label><select id="EditMenuZoneDrainDrainType">
             <option value="Test">Test</option>
             <option value="Test">Test</option>
             <option value="Test">Test</option>
@@ -269,7 +269,25 @@
     let activeElement = "";//Элемент который выбрали для поворота
     let degree = "0";//Градус поворота
     let containerNumberText = "";//Номер контейнера
-    const EditMenuSinkNameZone = document.getElementById("EditMenuSinkNameZone");//Текстовое поле 
+
+    const EditMenuCellMaximumHeight = document.getElementById("EditMenuCellMaximumHeight");//Текстовое поле меню максимальная высота
+
+    const EditMenuSinkNameZone = document.getElementById("EditMenuSinkNameZone");//Текстовое поле меню редактирования имя стока (зона)
+    const EditMenuSinkShortNameZone = document.getElementById("EditMenuSinkShortNameZone");//Текстовое поле меню редактирования сокращенное имя зоны
+    const EditMenuSinkXPosition = document.getElementById("EditMenuSinkXPosition");//Текстовое поле меню редактирования позиция по X
+    const EditMenuSinkYPosition = document.getElementById("EditMenuSinkYPosition");//Текстовое поле меню редактирования позиция по Y
+    const EditMenuSinkSizeX = document.getElementById("EditMenuSinkSizeX");//Текстовое поле меню редактирования размер по X
+    const EditMenuSinkSizeY = document.getElementById("EditMenuSinkSizeY");//Текстовое поле меню редактирования размер по Y
+    const EditMenuSinkRotation = document.getElementById("EditMenuSinkRotation");//Текстовое поле меню редактирования поворот
+
+    const EditMenuSinkOrientation = document.getElementById("EditMenuSinkOrientation");//выпадающий список ориентация меню редактирования поворот
+    const EditMenuSinkSiteNumber = document.getElementById("EditMenuSinkSiteNumber");//выпадающий список площадка № меню редактирования поворот
+    const EditMenuSinkDrainType = document.getElementById("EditMenuSinkDrainType");//выпадающий список тип стока меню редактирования поворот
+
+    const EditMenuSinkVisibility = document.getElementById("EditMenuSinkVisibility");//checkbox видимость меню редактирования
+    const EditMenuSinkAccessFromAbove = document.getElementById("EditMenuSinkAccessFromAbove");//checkbox доступ сверху меню редактирования
+    const EditMenuSinkEmptyOnly = document.getElementById("EditMenuSinkEmptyOnly");//checkbox только порожние меню редактирования
+
 
 
     doc.addEventListener('click', function (event) { //Получение названия div при событий click
@@ -279,7 +297,25 @@
         elTop = doc.querySelector(div).offsetTop;
         elLeft = doc.querySelector(div).offsetLeft;
         if (selector == 1) {
-            EditMenuSinkNameZone.value = event.target.getAttribute('Class');
+            EditMenuSinkNameZone.value = event.target.getAttribute('Name');
+            EditMenuSinkShortNameZone.value = event.target.getAttribute('Name').replace(/\s/g, '').replace('Зона', '');
+            EditMenuSinkXPosition.value = document.querySelector(div).offsetLeft;
+            EditMenuSinkYPosition.value = document.querySelector(div).offsetTop; 
+            
+            var st = window.getComputedStyle(document.querySelector(div), null);//Блок обработки матрицы transform для получения degreeRotation
+            var tr = st.getPropertyValue("-webkit-transform") ||
+                st.getPropertyValue("-moz-transform") ||
+                st.getPropertyValue("-ms-transform") ||
+                st.getPropertyValue("-o-transform") ||
+                st.getPropertyValue("transform") ||
+                "FAIL";
+            var values = tr.split('(')[1],
+                values = values.split(')')[0],
+                values = values.split(',');
+            var degree = values[1];
+            var degreeRotation = Math.round(Math.asin(degree) * (180 / Math.PI));           
+            EditMenuSinkRotation.value = degreeRotation;
+
         }
     });
 
@@ -431,7 +467,7 @@
                 if (stocksList.Stocks[p].Orientation == 1) //Отрисовка горизонтально    
                 {
                     schemHtml += "<style type=\"text/css\">"
-                    + ".divTable" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
                     + ".divTable" + stocksList.Stocks[p].Id + " TH {font-weight: bold;padding: 1px;text-align:center;font-size: 10px;}"
                     + ".divTable" + stocksList.Stocks[p].Id + " TD {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;}"
                     + ".divTable" + stocksList.Stocks[p].Id + " TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
@@ -442,7 +478,6 @@
                     + "<thead>";
                     schemHtml += "</thead>";
                     schemHtml += "<tbody>";
-
                     schemHtml += "<tr>";
                     schemHtml += "<th height=15px></th>";
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
@@ -463,7 +498,7 @@
                                 {                                   
                                     if (j < stocksList?.Stocks[p].Columns[i].CellsList.Count)//Для нормальной отрисовки столбцов разной размерности
                                     {
-                                        schemHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\" class=\"Table" + stocksList.Stocks[p].Id + "\" id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                        schemHtml += "<td width=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " height=15px><div style=\"min-width:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px\" class=\"Table" + stocksList.Stocks[p].Id + "\" id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\" name=\"" + stocksList.Stocks[p].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
                                     }
                                     else
                                     {
@@ -491,7 +526,7 @@
                 else if (stocksList.Stocks[p].Orientation == 2) //Отрисовка вертикально
                 {
                     schemHtml += "<style type=\"text/css\">"
-                    + ".divTable" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
+                    + ".divTable" + stocksList.Stocks[p].Id + "{-moz-transform: rotate(0deg);-webkit-transform: rotate(0deg);-o-transform: rotate(0deg);transform: rotate(0deg);table-layout: fixed;overflow:hidden;position:absolute;top:" + stocksList.Stocks[p].PositionY + "px;left:" + stocksList.Stocks[p].PositionX + "px;table-layout: fixed;}"
                     + ".divTable" + stocksList.Stocks[p].Id + " TH {font-weight: bold;padding: 1px;font-size: 10px;}"
                     + ".divTable" + stocksList.Stocks[p].Id + " TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
                     + ".divTable" + stocksList.Stocks[p].Id + " TD:hover {border: 1px solid black;padding: 1px;text-align: center;font-size: 10px;background: #F08080;}"
@@ -503,7 +538,6 @@
                     schemHtml += "</thead>";
                     schemHtml += "<tbody>";
 
-
                     for (int i = 0; i < stocksList?.Stocks[p].Columns.Count; i++)
                     {
                         schemHtml += "<tr>";
@@ -512,7 +546,7 @@
                         {                           
                             if (stocksList?.Stocks[p].Rows[j].Visibility == 1)//Проверка на то что можно отрисовывать
                             {
-                                schemHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\"class=\"Table" + stocksList.Stocks[p].Id + "\"id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
+                                schemHtml += "<td height=" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px bgcolor=" + stocksList?.Stocks[p].Columns[i].CellsList[j].Statuses[0].ColorHex + " width=15px><div style=\"min-height:" + (stocksList?.Stocks[p].Columns[i].Size + 20) + "px;min-width:15px;\"class=\"Table" + stocksList.Stocks[p].Id + "\"id=\"" + stocksList?.Stocks[p].Columns[i].CellsList[j].Name + "\" name=\"" + stocksList.Stocks[p].Name + "\">" + stocksList?.Stocks[p].Columns[i].CellsList[j].Containers.Count + "</div></td>"; //Содержимое таблицы
                             }
                             else
                             {
@@ -545,6 +579,7 @@
             topTableBodyHtml += "<style type=\"text/css\">"
             + ".BottomTable {border-collapse: collapse;min-height:100px;max-height: 150px;display: inline-block;}"
             + ".BottomTable TD {border: 1px solid black;padding: 1px;font-size: 10px;}"
+            + ".BottomTable tbody{min-height:100px;}"
             + "</style>";
             for (int p = 0; p < stocksList.Stocks.Count; p++)//Отрисовка тела таблицы
             {
@@ -556,8 +591,6 @@
                         {
                             for (int a = 0; a < stocksList.Stocks[p].Columns[i].CellsList[j].Containers.Count; a++)
                             {
-
-
                                 topTableBodyHtml += "<tr>";
                                 topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].ZIndex + "</td>";//Заполнение Этажа
                                 topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Name + "</td>";//Заполнение Положения
@@ -583,7 +616,6 @@
                                 topTableBodyHtml += "<td>" + stocksList.Stocks[p].Columns[i].CellsList[j].Containers[a].AcceptanceBidId + "</td>";//Заполнение Номер заявки
                                 topTableBodyHtml += "<td>Пусто</td>";//Заполнение Статус (временное)
                                 topTableBodyHtml += "</tr>";
-
                             }
                         }
                     }
