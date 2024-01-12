@@ -103,16 +103,186 @@
     border: 1px solid #dddddd;
 }
 
-
-
 .TableGroupNameAcceptContainer {
     border: 1px solid;
-    min-width: 500px;
+    min-width: 900px;
     background: #C0C0C0;
     text-align: center;
     vertical-align: middle;
     display: table-cell;
 }
+
+.TableGroupNameAcceptContainerContent {
+    width: 900px;
+    border: 1px solid;
+    height: 155px;
+    font-size:13px;
+}
+
+.TableGroupNameAcceptContainerContentAUTO {
+    border: 1px solid red;
+    color: red;
+    width: 50px;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+
+}
+
+.TableGroupNameAcceptContainerContentHeaderText {
+    display: table-cell;
+    border: 1px solid;
+    text-align: center;
+    vertical-align: middle;
+    width: 250px;
+}
+
+.TableGroupNameAcceptContainerContentAcceptRailwayAUTO {
+    border: 1px solid red;
+    color: red;
+    width: 50px;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+
+
+.TableAcceptFromTheCarrierPorozh {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 135px;
+    width: 135px;
+    border-collapse: collapse;
+    display: inline-block;
+}
+
+    .TableAcceptFromTheCarrierPorozh th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableAcceptFromTheCarrierPorozh td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.TableAcceptFromTheCarrierGruz {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 121px;
+    width: 121px;
+    border-collapse: collapse;
+    display: inline-block;
+    margin-left: 36px;
+}
+
+    .TableAcceptFromTheCarrierGruz th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableAcceptFromTheCarrierGruz td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.TableAcceptFromRailwayPorozh {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 135px;
+    width: 135px;
+    border-collapse: collapse;
+    display: inline-block;
+}
+
+    .TableAcceptFromRailwayPorozh th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableAcceptFromRailwayPorozh td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.TableAcceptFromRailwayGruz {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 85px;
+    width: 85px;
+    border-collapse: collapse;
+    display: inline-block;
+    margin-left: 75px;
+}
+
+    .TableAcceptFromRailwayGruz th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableAcceptFromRailwayGruz td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.TableAcceptFromStoragePorozh {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 135px;
+    width: 135px;
+    border-collapse: collapse;
+    display: inline-block;
+}
+
+    .TableAcceptFromStoragePorozh th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableAcceptFromStoragePorozh td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.TableAcceptFromStorageGruz {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 85px;
+    width: 85px;
+    border-collapse: collapse;
+    display: inline-block;
+    margin-left: 70px;
+}
+
+    .TableAcceptFromStorageGruz th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableAcceptFromStorageGruz td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
 
 .TableGroupNameIssueContainer {
     border: 1px solid;
