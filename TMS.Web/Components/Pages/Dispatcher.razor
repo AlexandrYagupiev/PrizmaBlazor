@@ -367,8 +367,184 @@
     </div>
 
     <div class="TableGroupNameIssueContainerContent">
+        <div class="TableGroupNameIssueContainerContentAUTO" style="color:cornflowerblue;border: 1px solid cornflowerblue;">AUTO</div>
+        <div class="TableGroupNameIssueContainerContentHeaderText" style="width: 350px;">ВЫДАТЬ НА АВТОПЕРЕВОЗЧИКА</div>
+        <div class="TableGroupNameIssueContainerContentAUTO" >AUTO</div>
+        <div class="TableGroupNameIssueContainerContentHeaderText">ВЫДАТЬ Ж.Д</div>
+
+        <table class="TableGroupNameIssuePorozh" id="TableGroupNameIssuePorozh">
+            <thead>
+                <tr>
+                    <th>ПОРОЖ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Test</td>                 
+                </tr>   
+                 <tr>
+                    <td>Test</td>                 
+                </tr>  
+                 <tr>
+                    <td>Test</td>                 
+                </tr>  
+                 <tr>
+                    <td>Test</td>                 
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="TableIssuedMotorCarrierPorozh" id="TableIssuedMotorCarrierPorozh">
+            <thead>
+                <tr>
+                    <th>ПОРОЖ</th>
+                    <th>f</th>
+                    <th>СТОК</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>Test</td>
+                    <td>Test</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="TableIssuedMotorCarrierGruz" id="TableIssuedMotorCarrierGruz">
+            <thead>
+                <tr>
+                    <th>ГРУЖ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="TableIssueRailwayPorozh" id="TableIssueRailwayPorozh">
+            <thead>
+                <tr>
+                    <th>ПОРОЖ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="TableIssueRailwayGruz" id="TableIssueRailwayGruz">
+            <thead>
+                <tr>
+                    <th>ГРУЖ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                </tr>
+            </tbody>
+        </table>
+
 
     </div>
+
+@*    <div class="TableGroupNameIssueStockContent">
+
+    </div> 
+
+   <div class="TableGroupNameMovementTerminalContent">
+
+    </div> *@
+
 
 </div>
 
@@ -669,6 +845,12 @@
             var degree = values[1];
             var degreeRotation = Math.round(Math.asin(degree) * (180 / Math.PI));           
             EditMenuSinkRotation.value = degreeRotation;
+
+
+            if (event.target.tagName == "TH") {
+                alert(target.innerHTML);
+            }
+
 
         }
     });

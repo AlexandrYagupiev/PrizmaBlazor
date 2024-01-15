@@ -106,17 +106,23 @@
 .TableGroupNameAcceptContainer {
     border: 1px solid;
     min-width: 900px;
+    width: 900px;
     background: #C0C0C0;
     text-align: center;
     vertical-align: middle;
     display: table-cell;
+    overflow: hidden;
 }
 
 .TableGroupNameAcceptContainerContent {
+    min-width: 900px;
     width: 900px;
     border: 1px solid;
     height: 155px;
-    font-size:13px;
+    min-height: 155px;
+    font-size: 13px;
+    display: inline-block;
+    overflow: hidden;
 }
 
 .TableGroupNameAcceptContainerContentAUTO {
@@ -126,7 +132,6 @@
     text-align: center;
     vertical-align: middle;
     display: table-cell;
-
 }
 
 .TableGroupNameAcceptContainerContentHeaderText {
@@ -287,21 +292,187 @@
 .TableGroupNameIssueContainer {
     border: 1px solid;
     background: #C0C0C0;
-    min-width: 500px;
+    min-width: 600px;
     text-align: center;
     vertical-align: middle;
     display: table-cell;
 }
 
+.TableGroupNameIssueContainerContent {
+    width: 600px;
+    min-width: 600px;
+    border: 1px solid;
+    height: 155px;
+    min-height: 155px;
+    font-size: 13px;
+    display: inline-block;
+    overflow: hidden;
+    margin-left: -4px;
+}
+
+.TableGroupNameIssueContainerContentAUTO {
+    border: 1px solid red;
+    color: red;
+    width: 50px;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.TableGroupNameIssueContainerContentHeaderText {
+    display: table-cell;
+    border: 1px solid;
+    text-align: center;
+    vertical-align: middle;
+    width: 250px;
+}
+
+.TableGroupNameIssuePorozh {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 71px;
+    width: 71px;
+    border-collapse: collapse;
+    display: inline-block;
+}
+
+    .TableGroupNameIssuePorozh th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableGroupNameIssuePorozh td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.TableIssuedMotorCarrierPorozh {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 135px;
+    width: 135px;
+    border-collapse: collapse;
+    display: inline-block;
+    margin-left: 60px;
+}
+
+    .TableIssuedMotorCarrierPorozh th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableIssuedMotorCarrierPorozh td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.TableIssuedMotorCarrierGruz {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 60px;
+    width: 60px;
+    border-collapse: collapse;
+    display: inline-block;
+    margin-left: 50px;
+}
+
+    .TableIssuedMotorCarrierGruz th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableIssuedMotorCarrierGruz td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.TableIssueRailwayPorozh {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 71px;
+    width: 71px;
+    border-collapse: collapse;
+    display: inline-block;
+}
+
+    .TableIssueRailwayPorozh th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableIssueRailwayPorozh td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+.TableIssueRailwayGruz {
+    overflow-y: scroll;
+    max-height: 100px;
+    height: 100px;
+    max-width: 57px;
+    width: 57px;
+    border-collapse: collapse;
+    display: inline-block;
+    margin-left: 67px;
+}
+
+    .TableIssueRailwayGruz th {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .TableIssueRailwayGruz td {
+        border: 1px solid;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+
+.TableGroupNameMovementTerminalContent {
+    width: 200px;
+    min-width: 200px;
+    border: 1px solid;
+    height: 155px;
+    min-height: 155px;
+    font-size: 13px;
+    display: inline-block;
+}
+
 .TableGroupNameIssueStock {
     border: 1px solid;
     border-color: black;
+    width: 250px;
     min-width: 250px;
     background: #00CED1;
     color: red;
     text-align: center;
     vertical-align: middle;
     display: table-cell;
+    overflow: hidden;
+}
+
+.TableGroupNameIssueStockContent {
+    width: 250px;
+    min-width: 250px;
+    border: 1px solid;
+    height: 155px;
+    min-height: 155px;
+    font-size: 13px;
+    display: inline-block;
+    overflow: hidden;
 }
 
 .TableGroupNameMovementTerminal {
@@ -311,4 +482,5 @@
     text-align: center;
     display: table-cell;
     vertical-align: middle;
+    overflow: hidden;
 }
