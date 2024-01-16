@@ -1518,7 +1518,7 @@
         try
         {
             HttpClient httpClient = ClientFactory.CreateClient();
-            var request = await httpClient.GetAsync("https://tapi2.cit-ekb.ru/Api/Scheme/GetScheme");
+            var request = await httpClient.GetAsync("");
             var response = await request.Content.ReadAsStringAsync();
             return response;  
         }
